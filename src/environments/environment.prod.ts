@@ -1,6 +1,6 @@
 export const environment = {
-  production: false,
-  apiUrl: "https://autocenterdms.azurewebsites.net/api/web/",
-  chatUrl: "https://autocenterchat.azurewebsites.net/",
-  documentUploadUrl: "https://autocenterdms.azurewebsites.net/backend/web/sign-in/"
+  production: true,
+  apiUrl: "https://apptest.halaleat.net/api/web/",
+  chatUrl: '#',
+  documentUploadUrl: "https://apptest.halaleat.net/backend/web/sign-in/"
 };

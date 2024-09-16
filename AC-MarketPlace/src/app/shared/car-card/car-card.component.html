@@ -1,0 +1,83 @@
+<!-- card -->
+<div class="card__image" *ngIf="car" (click)="routeToView(car)" [routerLink]="'/'+car?.dealership?.slug+'/'+car.slug" [id]="saved_car_id">
+  <!-- SLider wrapper -->
+  <div class="card__slider swiper saved-btn sorting-grid-img" [ngClass]="{'featured-btn': car?.is_featured}">
+    <!-- The moving part of the slider -->
+    <ngx-slick-carousel class="vehicle-types__wrapper swiper-wrapper carousel testimonials-main2"
+      #slickModal="slick-carousel" [config]="slideConfig" *ngIf="car?.images.length>0; else noImage">
+      <div ngxSlickItem *ngFor="let img of car?.images" class="card__slide swiper-slide"
+        [ngClass]="{'featured-btn': car?.is_featured}">
+        <img style="object-fit: contain;" [src]="img?.image_path" alt="car">
+      </div>
+    </ngx-slick-carousel>
+    <ng-template #noImage>
+      <img src="/assets/images/auto-center-logo.png">
+    </ng-template>
+    <!-- If you need pagination -->
+<!--    <div class="card__swiper-pagination"></div>-->
+<!--    &lt;!&ndash; If you need buttons for navigation (left/right) &ndash;&gt;-->
+<!--    <button type="button" class="card__button-prev" (click)="prev()"></button>-->
+<!--    <button type="button" class="card__button-next" (click)="next()"></button>-->
+  </div>
+
+</div>
+<a (click)="routeToView(car)" [routerLink]="'/'+car?.dealership?.slug+'/'+car.slug" class="card__description">
+  <div class="card__row">
+    <div class="card__title">{{car?.vehicleMake?.title}} {{car?.vehicleModel?.title}}</div>
+    <div class="card__price">{{car?.price | currency}}</div>
+  </div>
+  <div class="card__row">
+    <div class="card__mileage">{{car?.mileage | number}} miles</div>
+    <div class="fuel_trans_wrapper d-flex">
+      <div class="card__fuel" *ngIf="car.fuel_type">
+        <img src="assets/images/ic-gas-station.svg" alt="fuel">
+        <span class="text-uppercase">{{car?.fuel_type | slice:0:3 }}</span>
+      </div>
+      <div class="card__transmission" *ngIf="car.transmission">
+        <img src="assets/images/ic-gear.svg" alt="transmission">
+        <span class="text-uppercase">{{car?.transmission | slice:0:4}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="card__row justify-content-center" *ngIf="car?.distance">
+    <div class="card__title distance_val"><i class="fas fa-location" style="padding-right: 2px"></i>: {{car?.distance | number : '1.2-2'}} miles away</div>
+  </div>
+</a>
+<!-- Dealership section -->
+<div class="dashbord-left" *ngIf="car?.dealership">
+  <div class="dealerships-dashbord-left-inner-main">
+    <div class="dealerships-dashbord-left-volvo-cars-box">
+      <div class="volvo-cars-box-top">
+        <div class="volvo-ic-back">
+          <img [src]="car?.dealership?.avatar" class="img-fluid" alt="">
+        </div>
+        <div class="volvo-cars-info">
+          <h5 class="volvo-cars-title">{{car?.dealership?.business_name}}</h5>
+          <div class="volvo-cars-box-middle rating_wrapper">
+            <span *ngFor="let fullStar of fullStars" class="fa fa-star checked" data-jest="full star"></span>
+            <span *ngFor="let emptyStar of emptyStars" class="fa fa-star text-white" data-jest="empty star"></span>
+            <!-- <img src="assets/images/five-stars.svg" alt="" class="img-fluid"> -->
+            <p class="volvo-reviews">({{car?.dealership?.reviews?car?.dealership?.reviews:0}} reviews)</p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <p class="volvo-cars-contact"><i class="fa-solid fa-phone"></i><a
+                  [href]="'tel:' +car?.dealership?.business_phone">{{car?.dealership?.business_phone}} </a>
+              </p>
+            </div>
+            <div class="d-flex justify-content-between align-items-center" style="gap: 8px;">
+              <div class="dealership-location">
+                <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+ car?.dealership?.location_lat + ',' + car?.dealership?.location_lng"
+                  target="_blank"><span class="text-white"><i
+                      class="fa fa-map-marker"></i></span></a>
+              </div>
+              <i class="fas fa-comments text-white" (click)="openChatMiniBox(car?.chat_user_id)"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- end of card -->

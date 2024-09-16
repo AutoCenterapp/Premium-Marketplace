@@ -1,0 +1,9 @@
+<div class="modal-body">
+    <button type="button" class="close modal-close-button" (click)="closeModal()">
+        <i class="fa fa-times" aria-hidden="true"></i>
+    </button>
+    <div class="px-4 form-box">
+        <iframe [src]="iframeUrl ? (iframeUrl | safe) : null" width="100%">
+        </iframe>
+    </div>
+</div>

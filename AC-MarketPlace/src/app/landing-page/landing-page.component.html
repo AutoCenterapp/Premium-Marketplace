@@ -1,0 +1,132 @@
+<section class="buying">
+  <div class='buying__container'>
+
+    <div class="buying__row">
+
+      <!-- column -->
+      <div class="buying__content">
+        <div class="buying__bg">
+          <h1 class="buying__title">Car Buying Reimagined</h1>
+          <div class="buying__decor"></div>
+          <div class="buying__text">We are more than just a marketplace. At Auto Center, we’ve streamlined the car buying process so you can discover the easy way to buy a car online.</div>
+
+          <div class="buying__buttons" (click)="openComingSoonModal()">
+            <div class="buying__button">
+              <a ><img class="app-store" src="assets/images/app-store.svg" alt="App Store"></a>
+            </div>
+            <div class="buying__button">
+              <a ><img src="assets/images/google-play.svg" alt="Google Play"></a>
+            </div>
+          </div>
+          <app-search-against-query></app-search-against-query>
+        </div>
+
+      </div>
+      <!-- column end -->
+
+      <!-- column -->
+      <div class="buying__image  d-none d-sm-block">
+        <div class="buying__bg-black">
+        </div>
+        <img src="assets/images/blue-car-full.png" alt="car">
+      </div>
+      <!-- column end -->
+
+    </div><!-- row end -->
+  </div>
+</section>
+<!-- End of SECTION FIRST -->
+
+
+
+
+<app-vehcile-types></app-vehcile-types>
+<app-featured-cars></app-featured-cars>
+
+<!-- SECTION RIGHT-WAY -->
+<section class="right-way">
+  <img src="assets/images/blue-car.png" alt="car">
+  <div class='right-way__container'>
+
+    <div class="right-way__row">
+
+      <!-- column image -->
+      <div class="right-way__image">
+
+      </div>
+      <!-- column end -->
+
+      <!-- column content -->
+      <div class="right-way__content">
+        <h2 class="right-way__title">The right way <span>to buy </span> <span>a car</span> — <span>Auto
+            Center</span></h2>
+        <div class="right-way__text">They’re ready to sell, you’re ready to buy. Our online car marketplace connects you with dealers so you can get the fairest prices in just one click.</div>
+        <ul>
+          <li>
+            <div class="right-way__item">
+              <h3 class="right-way__list-title">Browse cars</h3>
+              <div class="right-way__list-text">Search for your dream car online, filtering by model, make, or year. Alternatively, search for listings from established <b>online car dealerships.</b></div>
+            </div>
+          </li>
+          <li>
+            <div class="right-way__item">
+              <h3 class="right-way__list-title">Compare</h3>
+              <div class="right-way__list-text">With all the best options at your fingertips, you’ll be able to compare cars and dealers before making your purchase.</div>
+            </div>
+          </li>
+          <li>
+            <div class="right-way__item">
+              <h3 class="right-way__list-title">Purchase!</h3>
+              <div class="right-way__list-text">Move through our secure checkout system, enter your card details, and e-sign documents online for maximum security and total peace of mind.</div>
+            </div>
+          </li>
+          <li>
+            <div class="right-way__item">
+              <h3 class="right-way__list-title">Personal service</h3>
+              <div class="right-way__list-text">We’re not just a one-stop shop. After buying, we’ll continue supporting you with payment reminders, credit monitoring, and car valuation services.</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- end column content -->
+
+    </div><!-- row end -->
+  </div>
+</section>
+<!-- End of SECTION RIGHT-WAY -->
+<app-testimonials></app-testimonials>
+
+<!-- SECTION ON-THE-GO -->
+<section class="on-the-go">
+  <div class='on-the-go__container'>
+    <div class="on-the-go__body">
+      <div class="on-the-go__content">
+        <h2 class="on-the-go__title">Car Marketplace
+          <span>on the go</span>
+        </h2>
+        <div class="on-the-go__text">Finding a car has never been more streamlined: shop from mobile phone, make online savings and have your car delivered to your door in no time.</div>
+        <div class="on-the-go__buttons" (click)="openComingSoonModal()">
+          <div class="on-the-go__button">
+            <a><img class="app-store" src="assets/images/app-store.svg" alt="App Store"></a>
+          </div>
+          <div class="on-the-go__button">
+            <a><img src="assets/images/google-play.svg" alt="Google Play"></a>
+          </div>
+        </div>
+      </div>
+      <div class="on-the-go__image">
+        <img src="assets/images/mobile.png" alt="mobile">
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End of SECTION ON-THE-GO -->
+
+<!-- coming soon modal section starts -->
+<ng-template #comingSoonModal let-modal>
+  <!-- Modal body -->
+  <div class="modal-body coming_soon_modal">
+    <span>Coming soon</span>
+  </div>
+</ng-template>
+<!-- coming soon modal section ends -->

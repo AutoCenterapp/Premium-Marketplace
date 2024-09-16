@@ -1,0 +1,34 @@
+<div class="sorting-grid-box" id="saved-car-box" (click)="routeToView(savedVehicle?.vehicle)" >
+  <div class="sorting-grid-img saved-btn" [ngClass]="{'featured-btn': savedVehicle?.vehicle?.is_featured}">
+      <img [src]="savedVehicle?.vehicle?.images[0]?.image_path" class="img-fluid" alt="">
+  </div>
+  <h5 class="price">{{savedVehicle?.vehicle?.price | currency}}</h5>
+  <h6 class="model">{{savedVehicle?.vehicle?.vehicleMake?.title}} {{savedVehicle?.vehicle?.vehicleModel?.title}}</h6>
+  <div class="sorting-star-middle">
+      <img src="assets/images/five-stars.svg" alt="" class="img-fluid">
+      <p class="rating">{{savedVehicle?.vehicle?.rating}}</p>
+      <p class="reviews">({{savedVehicle?.vehicle?.reviews}} reviews)</p>
+  </div>
+  <div class="sorting-box-bottom">
+      <ul>
+          <li>
+              <a href="#">
+                  <img src="assets/images/ic-road-perspective.svg" class="img-fluid" alt="">
+                  {{savedVehicle?.vehicle?.mileage}}
+              </a>
+          </li>
+          <li>
+              <a href="#">
+                  <img src="assets/images/ic-gas-station.svg" class="img-fluid" alt="">
+                  {{savedVehicle?.vehicle?.fuel_type}}
+              </a>
+          </li>
+          <li>
+              <a href="#" class="">
+                  <img src="assets/images/ic-gear.svg" class="img-fluid" alt="">
+                  {{savedVehicle?.vehicle?.transmission}}
+              </a>
+          </li>
+      </ul>
+  </div>
+</div>

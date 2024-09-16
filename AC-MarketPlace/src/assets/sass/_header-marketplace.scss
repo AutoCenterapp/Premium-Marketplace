@@ -1,0 +1,137 @@
+.header-marketplace {   
+        background-color: $white; 
+        border: 1px solid $light-gray;
+            .header-top {
+                padding: 10px 0;
+                border-bottom: 1px solid $light-gray;
+                .contact-detail {
+                    ul {
+                        display: flex;
+                        align-items: center;
+                        list-style: none;
+                            li {
+                                &:not(:last-child) {
+                                    margin-right: 50px;
+                                }
+                                a {
+                                    display: flex;
+                                    align-items: center;
+                                    font-weight: 500;
+                                    font-size: 12px;
+                                    line-height: 14px;
+                                    color: $primary;
+                                        img {
+                                            margin-right: 10px;
+                                        }
+                                }
+                            }
+                    }
+                }
+                .header-marketplace-top-social {
+                    ul {
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-end;
+                        list-style: none;
+                            li {
+                                &:not(:last-child) {
+                                    margin-right: 20px;
+                                }
+                                a {
+                                    display: flex;
+                                    align-items: center;
+                                    font-size: 13px;
+                                    line-height: 15px;
+                                    color: $primary;
+                                }
+                            }
+                    }
+                }
+            }
+            .header-menubar {
+                padding: 12px 0;
+                    .nav-item {
+                        &:not(:last-child) {
+                            margin-right: 45px;
+                        }
+                        .nav-link {
+                            font-weight: 500;
+                            font-size: 15px;
+                            line-height: 17px;
+                            text-transform: capitalize;
+                            color: $primary;
+                        }
+                        .dropdown-toggle::after {
+                            background-image: url(../images/marketplace-header-expand-more-ic.svg);
+                            border: 0;
+                            background-repeat: no-repeat;
+                            vertical-align: middle; 
+                            background-size: 100% auto;
+                            width: 8px;
+                            height: 5px;
+                            margin-left: 10px;
+                        }
+                    }
+                    .header-menubar-right {
+                        display: flex;
+                        align-items: center;
+                            .marketplace-user-name {
+                                font-weight: 500;
+                                font-size: 15px;
+                                line-height: 17px;
+                                color: $primary;
+                                margin-right: 13px;
+                            }
+                            .marketplace-user-img {
+                                width: 35px;
+                                height: 35px;
+                                object-fit: cover;
+                                border-radius: 100%;
+                                border: 3px solid $secondary;
+                                margin-right: 25px;
+                            }
+                            .btn--marketplace-header {
+                                background: $primary;
+                                border-radius: 6px;
+                                padding: 10px 15px;
+                                font-weight: 500;
+                                font-size: 12px;
+                                line-height: 14px;
+                                color: $white;
+                                display: flex;
+                                align-items: center;
+                                    img {
+                                        margin-right: 10px;
+                                    }
+                            }
+                    }
+            }
+}
+@media all and (max-width:991px){
+    .header-marketplace{
+        .header-menubar {
+            .navbar-collapse{
+                margin-top: 15px;
+                .nav-item{
+                    &:not(:last-child){
+                        margin-bottom: 15px;
+                    }
+                    
+                }
+                
+            }
+            .header-menubar-right{
+                flex-wrap: wrap;
+                flex-direction: column;
+                justify-content: left;
+                margin-top: 15px;
+                align-items: flex-start;
+                a{
+                    &:not(:last-child){
+                        margin-bottom: 15px;
+                    }
+                }
+            }
+        }
+    }
+}

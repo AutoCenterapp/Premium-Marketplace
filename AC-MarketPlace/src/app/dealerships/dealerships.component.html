@@ -1,0 +1,119 @@
+<section class="section section-dashbord-main customMinHeight">
+  <div class="container dashbord-right">
+    <div class="row align-items-center dashboard-right-sorting-main mb-2">
+      <div class="col-md-5 d-flex align-items-center">
+        <form name="buying-form" class="buying__form" action="#" method="post">
+          <mat-form-field floatLabel='never' class="example-full-width">
+            <input [formControl]="searchVehiclesCtrl" matInput placeholder="Search by dealership name">
+          </mat-form-field>
+          <button type="submit" class="buying__search-button" (click)="getDealerShipsAgainstQuery()"></button>
+        </form>
+      </div>
+      <div class="col-md-7 d-flex justify-content-end classForSortByMob">
+        <div class="dashbord-right">
+          <div class="dashboard-right-sorting-main mb-0">
+            <div class="dashboard-right-sorting-right mt-1">
+              <ng-container *ngIf="dealerShips[0]?.distance">
+                <p class="sort-by">Filter by miles:</p>
+                <div class="dropdown">
+                  <button class="btn btn-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {{selectedRadius}}
+                  </button>
+                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li *ngFor="let radius of radiusArray"><a class="dropdown-item"
+                        (click)="filterDealerShips(radius)">{{radius}}</a>
+                    </li>
+                  </ul>
+                </div>
+              </ng-container>
+              <div class="filters-button mx-2" (click)="showHideSearchFilters = !showHideSearchFilters">
+                <div class="filters-button__text">Filters</div>
+                <img src="assets/images/filters.svg" alt="filters" class="filters-button__img">
+                <img src="assets/images/filters-white.svg" alt="filters" class="filters-button__img-white">
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <app-car-listing-tabs (valueChanges)="vehiclesAgainstQuery($event)"></app-car-listing-tabs> -->
+      </div>
+    </div>
+    <div class="dashbord-left mt-3 dashbord-right" *ngIf="showHideSearchFilters">
+      <div class="dashbord-left-inner-main position-relative mb-1 dashboard-right-nav-tab-main py-2">
+        <div class="dashbord-left-inner-wrapper d-flex justify-content-center flex-wrap w-100">
+          <ul class="nav nav-pills dashboard-right-nav-tab row w-100 mw-100 d-flex">
+            <li class="nav-item col-md-3 col-12 m-0 d-block">
+              <a class="nav-link active" data-bs-toggle="pill" href="#featured-tab">Recommended for you</a>
+            </li>
+            <li class="nav-item col-md-3 col-12 m-0 d-block">
+              <a class="nav-link" data-bs-toggle="pill">Top Rated Dealerships</a>
+            </li>
+            <li class="nav-item col-md-3 col-12 m-0 d-block">
+              <a class="nav-link" data-bs-toggle="pill">Free Delivery</a>
+            </li>
+            <li class="nav-item col-md-3 col-12 m-0 d-block">
+              <a class="nav-link text-center" data-bs-toggle="pill">Nearby</a>
+            </li>
+          </ul>
+          <!-- <div class="tab-content">
+            <div class="tab-pane container" id="featured-tab"></div>
+            <div class="tab-pane container fade" id="menu1"></div>
+            <div class="tab-pane container fade active show" id="menu2"></div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+    <div class="dashboard-right-sorting-main" *ngIf="isRadiusChanged || searchAgainstQueryCalled">
+      <div class="dashboard-right-sorting-left mt-2">
+        <p *ngIf="isRadiusChanged" style="line-height: 28px;">We found <span>{{filteredDealerShips.length}}</span> dealerships available in your {{this.selectedRadius}} radius
+          <span class="search_title_wrapper">
+            <span class="searched_title">
+              Click here to search nationwide.
+            </span>
+            <i class="fa fa-close" (click)="filterDealerShips('Nationwide')"></i>
+          </span>
+        </p>
+        <p *ngIf="searchAgainstQueryCalled" style="line-height: 28px;">We found <span>{{filteredDealerShips.length}}</span> dealerships agsinst your seacrh
+          <span class="search_title_wrapper">
+            <span class="searched_title">
+              {{this.searchVehiclesCtrl.value}}
+            </span>
+            <i class="fa fa-close" (click)="clearSearchFilters()"></i>
+          </span>
+        </p>
+      </div>
+    </div>
+    <div infiniteScroll [infiniteScrollDistance]="0.5" *ngIf="filteredDealerShips && filteredDealerShips.length>0"
+      (scrolled)="getDealerShips()">
+      <div class="row mb-5" *ngFor="let dealerShip of filteredDealerShips">
+        <div class="col-md-4">
+          <app-dealership-card [dealerShip]="dealerShip"  [applyOnlineButtonRequired]="true" [applyOnlineRoute]="'/apply-online/' + this.dealerShip?.slug"></app-dealership-card>
+          <!-- <app-contact-dealer [dealerShipData]="dealerShip"></app-contact-dealer> -->
+        </div>
+        <div class="col-md-8">
+
+          <div class="container" id="car-test" *ngIf="dealerShip?.bannerCars && dealerShip?.bannerCars?.length>0">
+            <div class="row">
+              <div class="col-md-12" style="padding: 0; ">
+                <ngx-slick-carousel class="carousel testimonials-main2" [config]="slideConfig">
+                  <div ngxSlickItem class="slide" routerLink="/dealership/details/{{dealerShip.id}}"
+                    *ngFor="let banner of dealerShip?.bannerCars">
+                    <app-car-card [car]="mapDealerShipData(banner, dealerShip)"
+                      class="cards__card card me-1"></app-car-card>
+                  </div>
+                </ngx-slick-carousel>
+              </div>
+            </div>
+            <div style="text-align: right; margin-top: -20px;">
+              <a [routerLink]="'/dealership/' + dealerShip.id" class="btn btn--dashbord-left-show-more">Show More </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="more-btn" *ngIf="loadingData">
+      <span>{{dealerShips && dealerShips.length==0?'Loading items':'Loading more items'}}</span>
+      <img src="assets/images/icons/loading-gif.gif" alt="load">
+    </a>
+    <br>
+  </div>
+</section>

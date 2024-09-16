@@ -1,0 +1,41 @@
+<div class="estimation_calc_wrapper dashbord-left-inner-main bg-white">
+    <div class="estimated_price_box">
+      <div class="estimated_price">
+        <h5>Your estimated payment is</h5>
+        <span class="estimated_price_val">
+          <h4>${{estimatedPayment | number : '1.2-2'}}<span class="month"> /mo*</span></h4>
+        </span>
+      </div>
+      <div class="vehicle_price">
+        <h5>Vehicle Price {{vehicle?.price | currency }}</h5>
+      </div>
+    </div>
+    <div class="donw_payment_box">
+      <label class="label">Down Payment($)</label>
+      <div>
+        <input placeholder="$0" type="number" [(ngModel)]="downPayment" (keyup)="calculateEstimatedPrice()">
+      </div>
+    </div>
+    <div class="credit_score_box">
+      <label>Credit Score</label>
+      <div class="d-flex">
+        <div class="general_box" *ngFor="let cs of creditScore" [ngClass]="{'active': cs.selected}"
+          (click)="makeSelection(creditScore, cs, 'cs'); calculateEstimatedPrice()">
+          <span>{{cs.title}}</span>
+          <span>{{cs.range}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="loan_term_box">
+      <label>Duration</label>
+      <div class="d-flex">
+        <div class="general_box" *ngFor="let ln of loanTerm" [ngClass]="{'active': ln.selected}"
+          (click)="makeSelection(loanTerm, ln, 'ln'); calculateEstimatedPrice()">
+          <span class="duration_text">{{ln.title}}</span>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="btn_box d-flex justify-content-center">
+      <button class="btn btn-success btn-lg" style="padding: 6px 16px" type="button" (click)="calculateEstimatedPrice()"> Calculate</button>
+    </div> -->
+  </div>

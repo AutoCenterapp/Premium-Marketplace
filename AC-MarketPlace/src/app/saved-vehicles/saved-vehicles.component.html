@@ -1,0 +1,26 @@
+<section class="section section-dashbord-main customMinHeight">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+      <div class="dashbord-left">
+
+        <div class="dashboard-right-sorting-main">
+          <div class="dashboard-right-sorting-left">
+            <h2 class="dashboard-left-title">Saved Vehicles</h2>
+          </div>
+        </div>
+        <div class="cards" infiniteScroll [infiniteScrollDistance]="0.5" (scrolled)="onScroll()" *ngIf="savedVehicles && savedVehicles.length>0; else staticText">
+          <!-- <app-fvrt-car-card class="cards__card card mb-3" [savedVehicle]="savedVehicle" *ngFor="let savedVehicle of savedVehicles">
+          </app-fvrt-car-card> -->
+          <app-car-card class="cards__card card mb-3" *ngFor="let savedVehicle of savedVehicles"
+              [car]="savedVehicle?.vehicle" [saved_car_id]="'saved-car-box'"></app-car-card>
+        </div>
+        <ng-template #staticText>
+          <h2 *ngIf="loadingData" class="dashboard-left-title staticText">Loading your saved vehicles. Please wait!</h2>
+          <h2 *ngIf="!loadingData" class="dashboard-left-title staticText">You currently don't have any saved vehicles. Please <a class="text-primary" routerLink="/marketplace">click here</a> to save a vehicle.</h2>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</section>
+<br>

@@ -1,0 +1,87 @@
+<!--<app-car-global-filter></app-car-global-filter>-->
+<section class="section section-dashbord-main customMinHeight">
+  <div class="container">
+    <div class="row" *ngIf="(specificDealerShip | json) != '{}'">
+      <div class="col-md-4">
+        <div class="dashbord-left">
+          <div class="dealerships-dashbord-left-inner-main">
+            <app-dealership-card [dealerShip]="specificDealerShip"  [applyOnlineButtonRequired]="true" [applyOnlineRoute]="'/apply-online/' + this.specificDealerShip?.slug"></app-dealership-card>
+            <app-dealer-location [dealerShipData]="specificDealerShip"></app-dealer-location>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="dashbord-right dealerships-right-section position-relative">
+          <div class="dashboard-right-sorting-main">
+            <div class="dashboard-right-sorting-left">
+              <p>We found <span>{{this.totalCount}}</span> Cars available for you</p>
+            </div>
+            <div class="dashboard-right-sorting-right">
+              <p class="sort-by">Sort by:</p>
+              <div class="dropdown">
+                <button class="btn btn-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{currentSelection}}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                  <li><a class="dropdown-item"
+                         (click)="setSortingValues('created_at','descending','Listing Date: Newest first')">Listing
+                    Date: Newest first</a></li>
+                  <li><a class="dropdown-item"
+                         (click)="setSortingValues('created_at','ascending','Listing Date: Oldest First')">Listing Date:
+                    Oldest First</a></li>
+                  <li><a class="dropdown-item"
+                         (click)="setSortingValues('price','ascending','Price: Lowest first')">Price:
+                    Lowest first</a></li>
+                  <li><a class="dropdown-item"
+                         (click)="setSortingValues('price','descending','Price: Highest first')">Price:
+                    Highest first</a></li>
+                  <li><a class="dropdown-item"
+                         (click)="setSortingValues('mileage','ascending','Mileage: Lowest first')">Mileage: Lowest
+                    first</a></li>
+                  <li><a class="dropdown-item"
+                         (click)="setSortingValues('mileage','descending','Mileage: Highest first')">Mileage: Highest
+                    first</a></li>
+                  <li><a class="dropdown-item"
+                         (click)="setSortingValues('year','descending','Car Year: Newest first')">Car
+                    Year: Newest first</a></li>
+                  <li><a class="dropdown-item"
+                         (click)="setSortingValues('year','ascending','Car Year: Oldest first')">Car
+                    Year: Oldest first</a></li>
+                </ul>
+              </div>
+              <!-- <div class="sorting-grid-ic">
+                <a target="__blank" href="#">
+                  <img src="assets/images/marketplace-grid-ic.svg" class="img-fluid" alt="">
+                </a>
+              </div>
+              <div class="sorting-list-ic">
+                <a target="__blank" href="#">
+                  <img src="assets/images/marketplace-list-ic.svg" class="img-fluid" alt="">
+                </a>
+              </div> -->
+            </div>
+          </div>
+          <div class="row" *ngIf="vehicles && vehicles?.length>0" infiniteScroll
+               [infiniteScrollDistance]="0.5" (scrolled)="onScroll()">
+            <div *ngFor="let vehicle of vehicles | sorting:sortingType:sortBy" class="col-md-4 mb-3">
+              <app-car-card [car]="vehicle" class="cards__card card ">
+              </app-car-card>
+            </div>
+          </div>
+          <!-- <app-general-loader *ngIf="loadingData"></app-general-loader> -->
+          <div class="showing-result">
+            <output id="showing-result-output-two" class="showing-result-output">Showing {{vehicles?.length}}
+              of {{this.totalCount}} cars
+            </output>
+          </div>
+          <a class="more-btn" *ngIf="loadingData">
+            <span>{{vehicles && vehicles.length == 0 ? 'Loading items' : 'Loading more items'}}</span>
+            <img src="assets/images/icons/loading-gif.gif" alt="load">
+          </a>
+          <app-sponsored-ad></app-sponsored-ad>
+          <!--          <app-car-types></app-car-types>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

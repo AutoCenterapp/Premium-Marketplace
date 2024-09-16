@@ -1,0 +1,140 @@
+<!-- <section class="section section-featured">
+  <div class="container">
+    <div class="row align-items-center featured-main">
+      <h1 class="text-center">{{campaignData?.campaignAd?.title}}</h1>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="featured-grid-main" id="featured-tab">
+          <app-car-card *ngFor="let vehicle of campaignData?.campaignAd?.adVehicles" [car]="vehicle.vehicle" [campaignId]="campaignData?.campaign_ad_id">
+          </app-car-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<section class="section section-dashbord-main customMinHeight">
+  <div class="row align-items-center featured-main">
+    <h1 class="text-center title">{{campaignData?.campaignAd?.title}}</h1>
+  </div>
+  <div class="container" *ngIf="(campaignData | json) != '{}' && campaignData!=undefined && campaignData!=null">
+    <div class="row">
+      <div class="col-md-3"></div>
+      <div class="col-md-6 col-12 demo-form my-2">
+        <div class="dashbord-left">
+          <div class="dealerships-dashbord-left-inner-main">
+            <div class="dealerships-dashbord-left-volvo-cars-box row">
+              <div class="col-md-12 d-flex justify-content-center">
+                <div>
+                  <div class="volvo-ic-back">
+                    <img [src]="campaignData?.campaignAd?.campaign?.user?.dealership?.avatar" class="img-fluid" alt="">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <div class="row">
+                  <div class="col-md-12">
+                    <h5 class="volvo-cars-title text-center mt-2">{{campaignData?.campaignAd?.campaign?.user?.dealership?.business_name}}
+                    </h5>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="volvo-cars-box-middle">
+                      <p class="volvo-cars-contact text-white" style="line-height: 30px"><i class="fa-solid fa-phone icon_setting"></i>
+                        <a class="text-decoration-underline"
+                          [href]="'tel:' +campaignData?.campaignAd?.campaign?.user?.dealership?.business_phone">
+                          {{campaignData?.campaignAd?.campaign?.user?.dealership?.business_phone}}
+                        </a>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="volvo-cars-box-middle rating_wrapper">
+                      <span *ngFor="let fullStar of fullStars" class="fa fa-star checked" data-jest="full star"></span>
+                      <span *ngFor="let emptyStar of emptyStars" class="fa fa-star text-white" data-jest="empty star"></span>
+
+                      <!-- <img src="assets/images/five-stars.svg" alt="" class="img-fluid"> -->
+                      <p class="volvo-rating">{{campaignData?.campaignAd?.campaign?.user?.dealership?.rating}}</p>
+                      <p class="volvo-reviews">({{campaignData?.campaignAd?.campaign?.user?.dealership?.reviews}} reviews)
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="volvo-cars-box-bottom col-md-6 col-12">
+                    <p class="volvo-cars-box-bottom-title">OPENING HOURS</p>
+                    <div class="volvo-cars-box-bottom-info">
+                      <p
+                        *ngFor="let openingHours of campaignData?.campaignAd?.campaign?.user?.dealership?.location_opening_hours_text.split(',')">
+                        {{openingHours}}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="dealership-location d-flex flex-column col-md-6 col-12 mob_view" style="gap: 10px">
+                    <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+ campaignData?.campaignAd?.campaign?.user?.dealership?.location_lat + ',' + campaignData?.campaignAd?.campaign?.user?.dealership?.location_lng"
+                      target="_blank">
+                      <span class="text-white d-flex align-items-center"><i
+                          class="fa fa-map-marker px-2"></i>&nbsp;
+                        <span>
+                          {{campaignData?.campaignAd?.campaign?.user?.dealership?.location}}
+                        </span>
+                      </span>
+                    </a>
+                    <a class="external_website_link" (click)="onNavigate(campaignData?.campaignAd?.campaign?.user?.dealership?.business_site)">
+                      <img src="assets/images/icons/external-link.svg">
+                      <span class="text-white px-2 cursor-pointer">
+                        Website
+                      </span>
+                    </a>
+                  </div>
+                </div>
+                <!-- <div class="btns_wrapper mt-1">
+                  <button [routerLink]="'/apply-online/' + campaignData?.campaignAd?.campaign?.user?.dealership?.slug" class="btn btn-demo-started btn-buy mb-0 mt-2">
+                    <img src="assets/images/double-tick-icon.svg" class="img-fluid" alt=""> Apply Online
+                  </button>
+                  <button (click)="openChatMiniBox(campaignData?.campaignAd?.campaign?.user?.dealership?.chat_user_id)"
+                    class="btn btn-demo-started btn-chat mb-0 mt-2"><img src="assets/images/chat-icon.svg" class="img-fluid" alt="">
+                    Chat With Dealer
+                  </button>
+                </div> -->
+                <div class="row contact_wrapper">
+                  <button class="col-12 apply_online_btn" [routerLink]="'/apply-online/' + campaignData?.campaignAd?.campaign?.user?.dealership?.slug">
+                    <img src="assets/images/double-tick-icon.svg" class="img-fluid" alt=""> Apply Online
+                  </button>
+                  <button class="call_btn col-md-4 col-12 chat_with_dealer_btn pl-0" (click)="openChatMiniBox()"><img
+                      src="assets/images/chat-icon.svg" class="img-fluid" alt="">
+                    Chat
+                  </button>
+                  <div class="col-md-4 col-12 pr-0">
+                    <button class="call_btn col-12">
+                      <a class="text-decoration-underline phone_btn_font" [href]="'tel:' +campaignData?.campaignAd?.campaign?.user?.dealership?.business_phone">
+                        <i class="fa fa-phone"></i>&nbsp;
+                        {{campaignData?.campaignAd?.campaign?.user?.dealership?.business_phone}}
+                      </a>
+                    </button>
+                  </div>
+                  <div class="col-md-4 col-12 pr-0">
+                    <button class="col-12 directions_btn">
+                      <a target="_blank" [href]="'https://www.google.com/maps/dir/?api=1&destination=' + campaignData?.campaignAd?.campaign?.user?.dealership?.location_lat + ',' + campaignData?.campaignAd?.campaign?.user?.dealership?.location_lng" class="btn btn--get-directions get_direction">
+                        Directions
+                      </a>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 p-0 mt-3">
+        <div id="featured-tab" class="cards">
+          <app-car-card class="cards__card card my-1" *ngFor="let vehicle of campaignData?.campaignAd?.adVehicles" [car]="vehicle.vehicle"
+            [campaignId]="campaignData?.campaign_ad_id" ></app-car-card>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

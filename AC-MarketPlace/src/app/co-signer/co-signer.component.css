@@ -1,0 +1,13 @@
+.btn-demo-started {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100% !important;
+  height: 50px;
+  background: #B71E1E;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 15px;
+  text-align: center;
+  color: #FFFFFF;
+}

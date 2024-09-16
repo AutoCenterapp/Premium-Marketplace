@@ -1,0 +1,186 @@
+<!--<app-car-global-filter></app-car-global-filter>-->
+<app-general-loader [msg]="'Please wait!'" *ngIf="showLoader==true"></app-general-loader>
+<section class="section section-dashbord-main">
+  <div class="container">
+    <div class="row">
+      <!-- <div class="col-md-12 col-12">
+        <div class="dashbord-right">
+          <div class="dashboard-right-nav">
+            <p class="d-car-name"><a href="#" class="d-car-type">{{vehicle?.condition | uppercase}} CAR</a>
+              / {{vehicle?.title}}
+            </p>
+          </div>
+        </div>
+      </div> -->
+      <div class="col-md-8">
+        <div class="dashbord-right">
+          <!-- <div class="dashboard-right-nav">
+
+            <div class="d-car-name-main">
+              <div *ngIf="isLogin">
+                <div *ngIf="!isSaved">
+                  {{vehicle?.title}}
+                  <img style="cursor: pointer;" (click)="addSavedVehicles()" title="Mark as Saved" width="40px"
+                    src="assets/images/heart-save-icon-unfilled.svg" class="img-fluid" />
+                </div>
+                <div *ngIf="isSaved">
+                  {{vehicle?.title}}
+                  <img style="cursor: pointer;" width="40px" title="Remove from Saved list"
+                    (click)="removeSavedVehicles()" src="assets/images/heart-save-icon.svg" class="img-fluid" />
+                </div>
+              </div>
+              <span *ngIf="!isLogin">
+                {{vehicle?.title}}
+              </span>
+            </div>
+
+            <p class="d-car-short-descp">{{vehicle?.engine_size}} {{vehicle?.vehicleDriveType?.name}}
+              {{vehicle?.transmission}} {{vehicle?.doors}}
+              Doors</p>
+          </div> -->
+          <div class="car-model-assets/images">
+            <div id="carouselExampleCaptions" class="carousel slide" data-interval="false" data-bs-ride="carousel">
+              <div class="carousel-inner position-relative" id="car-model">
+                <div class="d-flex product-info-icons align-items-center">
+                  <div><span class="badge-info badge-sm">{{vehicle?.condition | uppercase}} CAR - IN STOCK</span></div>
+                  <div class="d-flex"><img src="assets/images/views-icon.svg" class="img-fluid">
+                    <span class="views-number">{{vehicle?.viewCount }} Views</span>
+                  </div>
+                  <div class="d-flex"><img src="assets/images/heart-save-icon.svg" class="img-fluid">
+                    <span class="views-number">{{vehicle?.saveCount }} Saves</span>
+                  </div>
+                </div>
+                <div class="carousel-item" *ngFor="let slide of vehicle?.images; let i = index"
+                     [ngClass]="slide?.is_banner == 1? 'active': ''">
+                  <img [src]="slide?.image_path" class="d-block w-100" id="main-img" alt="no image here">
+                </div>
+              </div>
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                      data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                      data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+              </button>
+            </div>
+
+            <ul class="cars-list" id="cars-list" *ngIf="vehicle?.images && vehicle?.images.length>0">
+              <li *ngFor="let image of vehicle?.images | imageSort">
+                <img [src]="image?.image_path" class="model-img" id="{{image?.id}}vehicle-image"
+                     onclick="ChangeImg(this.id)">
+              </li>
+            </ul>
+          </div>
+
+          <div class="dashbord-left-inner-main bg-white" *ngIf="vehicle && vehicle.length!=0">
+            <div class="accordion" id="accordionExample">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Features
+                  </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                  <div class="accordion-body">
+                    <table class="table feature-table">
+                      <tbody>
+                      <tr>
+                        <th colspan="2" class="tb-head">
+                          <h6 class="feature-title">Features</h6>
+                        </th>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h6 class="feature-title-text">Convenience</h6>
+                        </td>
+                        <td>
+                          <p class="feature-detail-text">Heated Seats<br>Heated Steering Wheel<br>Navigation
+                            System<br>Power
+                            Liftgate</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h6 class="feature-title-text">Entertainment</h6>
+                        </td>
+                        <td>
+                          <p class="feature-detail-text">Apple CarPlay/Android Auto<br>Bluetooth<br>HomeLink</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h6 class="feature-title-text">Exterior</h6>
+                        </td>
+                        <td>
+                          <p class="feature-detail-text">Alloy Wheels<br>Sunroof/Moonroof</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <h6 class="feature-title-text">Safety</h6>
+                        </td>
+                        <td>
+                          <p class="feature-detail-text">Backup Camera<br>Blind Spot Monitor<br>Brake Assist<br>LED
+                            Headlights<br>Stability Control</p>
+                        </td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div *ngIf="vehicle?.additional_info?.description" class="dashbord-left" id="warranty">
+            <div class="dashbord-left-inner-main bg-white">
+              <div class="dashbord-left-inner">
+                <table class="table feature-table">
+                  <tbody>
+                  <tr>
+                    <th class="tb-head">
+                      <h6 class="feature-title">Description</h6>
+                    </th>
+                  </tr>
+                  </tbody>
+                </table>
+                <p class="warranty-text">
+                  {{ vehicle?.additional_info?.description }}
+                </p>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div *ngIf="vehicle?.additional_info?.comments" class="dashbord-left" id="comments">
+            <div class="dashbord-left-inner-main bg-white">
+              <div class="dashbord-left-inner">
+                <table class="table feature-table">
+                  <tbody>
+                  <tr>
+                    <th class="tb-head">
+                      <h6 class="feature-title">Comments</h6>
+                    </th>
+                  </tr>
+                  </tbody>
+                </table>
+                <p class="warranty-text">
+                  {{ vehicle?.additional_info?.comments }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="vehicle && vehicle.length!=0">
+        <app-car-details-right-side [campaignId]="campaignId" [vehicle]="vehicle"></app-car-details-right-side>
+      </div>
+    </div>
+  </div>
+</section>
+
+<br>
+

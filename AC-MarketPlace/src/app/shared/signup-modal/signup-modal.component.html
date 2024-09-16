@@ -1,0 +1,115 @@
+<app-general-loader *ngIf="showLoader==true"></app-general-loader>
+<div class="modal-header">
+    <h5 class="modal-title" id="exampleModalLabel">Inquiry Form</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss('Cross click')"></button>
+</div>
+<div class="modal-body">
+    <div class="row form-page section-dashbord-main mt-0">
+        <div class="col-md-12 col-12 demo-form my-0">
+            <main class="section section-main demo-form-iner">
+                <section class="section " [formGroup]="signupForm">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6 col-12">
+                                <label class="d-form-label">First Name</label>
+                                <div class="input-field">
+                                    <input type="text" formControlName="first_name" class="form-control d-input-f"
+                                        placeholder="Enter First Name" required>
+                                </div>
+                                <div class="form-control"
+                                    *ngIf="first_name?.invalid && (first_name?.dirty || first_name?.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="first_name?.errors?.['required']">
+                                        First Name is required.
+                                    </div>
+                                    <div *ngIf="first_name?.errors?.['error']">
+                                        {{ first_name?.errors?.['error'] }}
+                                    </div>
+                                    <div *ngIf="first_name?.errors?.['invalid']">
+                                        {{ first_name?.errors?.['invalid']}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label class="d-form-label">Last Name</label>
+                                <div class="input-field">
+                                    <input type="text" formControlName="last_name" class="form-control d-input-f"
+                                        placeholder="Enter Last Name" required>
+                                </div>
+                                <div class="form-control"
+                                    *ngIf="last_name?.invalid && (last_name?.dirty || last_name?.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="last_name?.errors?.['required']">
+                                        Last Name is required.
+                                    </div>
+                                    <div *ngIf="last_name?.errors?.['error']">
+                                        {{ last_name?.errors?.['error'] }}
+                                    </div>
+                                    <div *ngIf="last_name?.errors?.['invalid']">
+                                        {{ last_name?.errors?.['invalid']}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label class="d-form-label">Email</label>
+                                <div class="input-field">
+                                    <input type="email" formControlName="email" class="form-control d-input-f"
+                                        placeholder="Enter Email" required>
+                                </div>
+                                <div class="form-control" *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="email?.errors?.['required']">
+                                        Email is required.
+                                    </div>
+                                    <div *ngIf="email?.errors?.['error']">
+                                        {{ email?.errors?.['error'] }}
+                                    </div>
+                                    <div *ngIf="email?.errors?.['invalid']">
+                                        {{ email?.errors?.['invalid']}}
+                                    </div>
+                                    <div *ngIf="email?.errors?.['pattern']">
+                                        Please enter a valid email address.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label class="d-form-label">Phone</label>
+                                <div class="input-field inner-addon">
+                                    <input appPhoneMask type="text" formControlName="phone" class="form-control d-input-f"
+                                        placeholder="Enter Phone">
+                                </div>
+                                <div class="form-control"
+                                    *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)"
+                                    class="alert alert-danger">
+                                    <div *ngIf="phone?.errors?.['required']">
+                                        Phone number is required.
+                                    </div>
+                                    <div *ngIf="phone?.errors?.['error']">
+                                        {{ phone?.errors?.['error'] }}
+                                    </div>
+                                    <div *ngIf="phone?.errors?.['invalid']">
+                                        {{ phone?.errors?.['invalid']}}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div *ngIf="signupForm.errors" class="alert alert-danger form-error">
+                                    <div>
+                                        {{signupForm.errors?.['Invalid']}}
+                                    </div>
+                                    <div>{{signupForm.errors?.['userInvalid']}}</div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12 d-flex justify-content-end">
+                                <button class="btn btn-demo-started" type="button" (click)="onSubmit()">Submit
+                                    inquiry</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</div>

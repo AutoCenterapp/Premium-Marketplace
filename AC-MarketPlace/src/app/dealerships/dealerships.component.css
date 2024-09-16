@@ -1,0 +1,35 @@
+.dealerships-dashbord-left-volvo-cars-box {
+  cursor: pointer;
+}
+.d-input-s{
+  padding: 0px 40px 0px 8px;
+  height: 30px;
+}
+.filter_wrapper{
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 15px;
+}
+.section-dashbord-main .dashbord-right .dashboard-right-nav-tab-main .dashboard-right-nav-tab{
+  flex-wrap: inherit !important;
+}
+@media (max-width: 992px){
+  .section-dashbord-main .container .row .col-md-3{
+    width: 100% !important;
+  }
+}
+.filters-button{
+  height: 40px;
+    cursor: pointer;
+}
+.buying__form {
+  position: initial !important;
+  width: 100%;
+  height: 50px;
+}
+.buying__search-button {
+  height: 40px;
+  width: 40px;
+  flex: 0 0 40px;
+}

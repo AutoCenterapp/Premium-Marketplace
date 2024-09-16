@@ -1,0 +1,119 @@
+.showing-result{
+  padding: 50px 0px;
+    text-align: center;
+}
+.showing-result output{
+  display: block;
+    font-size: 13px;
+    line-height: 15px;
+    text-transform: capitalize;
+    color: #5F6973;
+    margin-bottom: 15px;
+}
+.volvo-ic-back{
+  width: 100% !important;
+  height: auto;
+}
+.volvo-ic-back img{
+  border-radius: 50%;
+  width: 200px;
+  height: auto;
+}
+.volvo-cars-title{
+  font-weight: 700;
+    font-size: 23px;
+    line-height: 27px;
+    color: #FFFFFF;
+    margin-bottom: 9px;
+}
+.icon_setting{
+  margin-right: 10px;
+    font-size: 14px;
+}
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-bottom{
+  border-top: 0px;
+  padding: 0px;
+}
+.btns_wrapper{
+  display: flex;
+  gap: 20px;
+}
+.btn-chat{
+  background: #a49f9f;
+}
+.title{
+  font-size: 30px;
+  font-weight: 700;
+  color: #0c2434;
+}
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-middle{
+  padding: 6px 0 0px;
+}
+@media (max-width: 770px) {
+  .mob_view {
+    padding-left: 0px;
+    padding-top: 12px;
+  }
+  .col-md-12{
+    padding-left: 0px !important;
+  }
+  .col-md-6{
+    padding-left: 4px !important;
+  }
+  .mob_view i{
+    padding-left: 0px !important;
+  }
+  .btns_wrapper{
+    flex-direction: column;
+    gap: 2px !important;
+  }
+}
+.contact_wrapper{
+  padding: 4px 10px 6px !important;
+  background: #FFFFFF;
+  border: 1px solid #EAEAEA;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  margin-top: 10px;
+}
+button{
+  text-align: center;
+  color: #FFFFFF;
+  font-weight: 700;
+  height: 60px;
+  font-size: 16px;
+  line-height: 19px;
+  border-radius: 8px;
+  margin: 2px 0px;
+}
+.apply_online_btn{
+  background: #B71E1E;
+}
+.call_btn, .inquiry_btn{
+  background: #ffffff;
+  color: black;
+  border-radius: 8px;
+  border: 1px solid rgba(19, 16, 16, 0.2);
+}
+.chat_with_dealer_btn{
+  background: #a49f9f;
+  color: white;
+}
+.directions_btn{
+  background: #0C2434;
+  color: white;
+}
+.directions_btn a{
+  color: white;
+}
+.pl-0{
+  padding-left: 0px;
+}
+.pr-0{
+  padding-right: 0px;
+}
+@media all and (max-width: 767px) {
+  .pr-0{
+    padding-left: 0px;
+  }
+}

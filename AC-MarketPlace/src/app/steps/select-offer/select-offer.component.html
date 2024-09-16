@@ -1,0 +1,103 @@
+<section class="section section-dashbord-main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="dashbord-left">
+          <h2 class="dashboard-left-title">Step 2# Select Offer</h2>
+        </div>
+        <div class="top-pre-approved-box">
+          <div class="row">
+            <div class="col-md-7 col-12">
+              <div class="approved-text"><img src="assets/images/double-tick-icon.svg" class="img-fluid" alt="">
+                You are Approved
+              </div>
+            </div>
+            <div class="col-md-5 col-12">
+              <div class="agent-btn">
+                <div class="chat-agent">
+                  Select Your Offer Now
+                  <!--                      <img src="assets/images/thin_big_right.svg" class="img-fluid right-arrow" alt="">-->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="car-title">
+          <p class="d-car-name-main">{{lead?.vehicle?.title}}</p>
+          <p class="d-car-short-descp">{{lead?.vehicle?.engine_size}} {{lead?.vehicle?.drive_type}}
+            {{lead?.vehicle?.transmission}} {{lead?.vehicle?.doors}}
+            Doors</p>
+        </div> -->
+        <div class="car-model-assets/images">
+          <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner position-relative" id="car-model">
+              <div class="d-flex product-info-icons align-items-center">
+                <div><span class="badge-info badge-sm" >{{vehicle?.condition | uppercase}} CAR - IN STOCK</span></div>
+                <div class="d-flex"><img src="assets/images/views-icon.svg" class="img-fluid">
+                  <span class="views-number">{{vehicle?.viewCount }} Views</span>
+                </div>
+                <div class="d-flex"><img src="assets/images/heart-save-icon.svg" class="img-fluid">
+                  <span class="views-number">{{vehicle?.saveCount }} Saves</span>
+                </div>
+              </div>
+              <div class="carousel-item" *ngFor="let slide of vehicle?.images; let i = index"
+                   [ngClass]="slide?.is_banner == 1? 'active': ''">
+                <img [src]="slide?.image_path" class="d-block w-100" alt="no image here">
+              </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                    data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+
+          <ul class="cars-list" id="cars-list" *ngIf="vehicle?.images && vehicle?.images.length>0">
+            <li *ngFor="let image of vehicle?.images | imageSort"><img [src]="image?.image_path" class="model-img">
+            </li>
+          </ul>
+        </div>
+        <div class="document-upload-box">
+          <p class="upload-document-title">Select Offer</p><br>
+          <div class="row">
+            <div class="col-md-12   ">
+              <div class="row top-pre-approved-box2" *ngFor="let leadOffer of leadOffers">
+                <div class="col-md-2  d-flex align-items-center">
+                  <div class="cong-col">
+                    <div class="approved-text1">{{leadOffer?.option_title}}</div>
+                  </div>
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                  <div class="approved-text4">You have been pre approved for the {{lead?.vehicle?.title}}.</div>
+                </div>
+                <div class="col-md-1  ">
+                  <div class="approved-text5">Down Payment: {{leadOffer?.down_payment | currency}}</div>
+                </div>
+                <div class="col-md-1  ">
+                  <div class="approved-text5">Monthly Payment: {{leadOffer?.monthly_payment | currency}}</div>
+                </div>
+                <div class="col-md-1  d-flex align-items-center">
+                  <div class="approved-text5">Created At: {{leadOffer?.created_at | date}}</div>
+                </div>
+                <div class="col-md-3 d-flex align-items-center">
+                  <div class="cong-col w-100">
+                    <button class="btn btn-sign" (click)="selectOffer(leadOffer)">Select Offer <img
+                        src="assets/images/thin_big_right.svg" class="img-fluid right-arrow" alt=""></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4" *ngIf="vehicle?.length!=0 && this.lead.length!=0">
+        <app-car-details-right-side [vehicle]="vehicle"></app-car-details-right-side>
+      </div>
+    </div>
+  </div>
+</section>

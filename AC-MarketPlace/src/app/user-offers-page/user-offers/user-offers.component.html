@@ -1,0 +1,41 @@
+<!--<app-car-global-filter></app-car-global-filter>-->
+<section class="section section-dashbord-main customMinHeight">
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
+        <div class="dashbord-left">
+
+          <div class="dashboard-right-sorting-main">
+            <div class="dashboard-right-sorting-left">
+              <h2 class="dashboard-left-title">My Offers</h2>
+            </div>
+          </div>
+          <div class="cards" *ngIf="myOffers && myOffers.length>0; else staticText">
+            <app-car-offer-card class="cards__card card mb-3" *ngFor="let offer of myOffers" [offer]="offer"></app-car-offer-card>
+          </div>
+          <ng-template #staticText>
+            <h2 *ngIf="loadingData" class="dashboard-left-title staticText">Loading your offers. Please wait!</h2>
+            <h2 *ngIf="!loadingData" class="dashboard-left-title staticText">You currently don't have any offers. Please <a class="text-primary" routerLink="/marketplace">click here</a> to submit an offer.</h2>
+          </ng-template>
+        </div>
+        <!-- <div class="dashbord-right">
+          <br>
+          <div class="dashboard-right-sorting-main">
+            <div class="dashboard-right-sorting-left">
+              <h2 class="dashboard-left-title2">Reviewed Offers</h2>
+            </div>
+          </div>
+          <div class="sorting-grid-main">
+            <app-car-offer-card></app-car-offer-card>
+            <app-car-offer-card></app-car-offer-card>
+            <app-car-offer-card></app-car-offer-card>
+            <app-car-offer-card></app-car-offer-card>
+            <app-car-offer-card></app-car-offer-card>
+            <app-car-offer-card></app-car-offer-card>
+          </div>
+
+        </div> -->
+      </div>
+    </div>
+</section>
+<br>

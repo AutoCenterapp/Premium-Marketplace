@@ -1,0 +1,115 @@
+<!--<img src="../../../assets/images/demo-cover.png" width="100%">-->
+<div class="position-relative">
+  <app-general-loader *ngIf="showLoader == true"></app-general-loader>
+  <div class="row form-page section-dashbord-main">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4 col-12 demo-form">
+      <main class="section section-main demo-form-iner">
+        <form class="section" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="container">
+            <h1 class="request-note">Login</h1> <br>
+            <div class="row">
+              <div class="col-md-12 col-12">
+                <label class="d-form-label">Email Address</label>
+                <div class="input-field">
+                  <input formControlName="username" type="text" class="form-control d-input-f" placeholder="Enter Email">
+                </div>
+                <div class="form-control" *ngIf="username?.invalid && (username?.dirty || username?.touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="username?.errors?.['required']">
+                    User Name is required.
+                  </div>
+                  <div *ngIf="username?.errors?.['error']">
+                    {{ username?.errors?.['error'] }}
+                  </div>
+                  <div *ngIf="username?.errors?.['invalid']">
+                    {{ username?.errors?.['invalid']}}
+                  </div>
+                  <div *ngIf="username?.errors?.['pattern']">
+                    Please enter a valid email address.
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 col-12">
+                <label class="d-form-label">Password</label>
+                <div class="input-field inner-addon">
+                  <a (click)="toggleVisibility()" [class]="visibility ? '' : 'd-none'">
+                    <i style="color: #97a0b7;" class="fas fa-eye-slash"></i>
+                  </a>
+                  <a (click)="toggleVisibility()" [class]="!visibility ? '' : 'd-none'">
+                    <i style="color: #97a0b7;" class="fas fa-eye"></i>
+                  </a>
+                  <input id="passInput" formControlName="password" type="Password" class="form-control d-input-f"
+                    placeholder="Enter Password">
+                </div>
+                <div class="form-control" *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+                  class="alert alert-danger">
+                  <div *ngIf="password?.errors?.['required']">
+                    Password is required.
+                  </div>
+                  <div *ngIf="password?.errors?.['invalid']">
+                    {{ password?.errors?.['invalid']}}
+                  </div>
+                  <!-- <div *ngIf="password?.errors?.cannotContainSpace">{{'passwordwhitespace'|translate}}</div> -->
+                </div>
+              </div>
+              <div class="col-12">
+                <div *ngIf="loginForm.errors" class="alert alert-danger form-error">
+                    <div>
+                        {{loginForm.errors?.['Invalid']}}
+                    </div>
+                    <div>{{loginForm.errors?.['userInvalid']}}</div>
+                </div>
+                <p class="d-text"><a routerLink="/forgot-password" href="#" class="d-text-link2">Forgot Password?</a>
+                </p>
+                <p class="d-text"><a href="#" class="d-text-link2 d-none" data-bs-toggle="modal" id="FA-btn" data-bs-target="#myModal">Open?</a>
+                </p>
+            </div>
+              <div class="col-md-12">
+                <button class="btn btn-demo-started" type="submit">Login</button>
+              </div>
+              <div class="col-md-12">
+                <p class="d-text">Don't have an Account? <a routerLink="/signup" class="d-text-link2">Sign Up</a></p>
+              </div>
+
+
+            </div>
+          </div>
+        </form>
+      </main>
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
+</div>
+
+<!-- The Modal -->
+<div class="modal fade " id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content demo-form">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="btn-close d-none" data-bs-dismiss="modal" id="FA-close"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body ">
+        <h4 class="request-note">Two Factor Authentication</h4>
+        <p>Your account is protected with two-factor authentication. Please enter the code that sent to you phone number.</p>
+        <br><label class="d-form-label">Enter Code</label>
+        <div class="d-flex justify-content-between align-items-center">
+          <input id="twoFA"  type="number" class="form-control d-input-f"
+                 placeholder="Code">
+          <button type="button" class="btn btn-demo-started ms-2 mt-3" (click)="verifyAuthCode()" >Verify</button>
+        </div>
+        <p class="d-text mt-0"><a  href="javascript:void(0)" class="d-text-link2" id="resend-code" (click)="sendVerificationCode()">Didn't received the code?Resend code.</a><span class="ms-2" id="timer"></span>
+        </p>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

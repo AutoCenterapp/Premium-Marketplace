@@ -1,0 +1,91 @@
+<div class="dashbord-left">
+  <div class="dealerships-dashbord-left-inner-main">
+    <div class="dealerships-dashbord-left-volvo-cars-box">
+      <div class="row" style="float: right">
+        <a class="external_website_link" (click)="onNavigate(dealerShip?.business_site)">
+          <img src="assets/images/icons/external-link.svg">
+        </a>
+      </div>
+      <div class="volvo-cars-box-top" [ngClass]="dealerShip?.distance? 'settings_for_distance': ''">
+        <div class="volvo-ic-back">
+          <img [src]="dealerShip?.avatar" class="img-fluid" alt="">
+        </div>
+        <div class="volvo-cars-info">
+          <h5 class="volvo-cars-title" style="cursor: pointer" [routerLink]="'/dealership/' + dealerShip?.slug">
+            {{dealerShip?.business_name}}</h5>
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="volvo-cars-contact"><i class="fa-solid fa-phone"></i>
+              <a [href]="'tel:' +dealerShip?.business_phone">{{dealerShip?.business_phone}}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="distance_wrapper" *ngIf="dealerShip.distance">
+        <p class="text-white pt-2 text-right w-100">Distance: {{dealerShip?.distance | number : '1.2-2'}}</p>
+      </div>
+      <div class="volvo-cars-box-middle pb-0 rating_wrapper">
+        <span *ngFor="let fullStar of fullStars" class="fa fa-star checked" data-jest="full star"></span>
+        <span *ngFor="let emptyStar of emptyStars" class="fa fa-star text-white" data-jest="empty star"></span>
+        <p class="volvo-rating">{{dealerShip?.rating}}</p>
+        <p class="volvo-reviews">({{dealerShip?.reviews}} reviews)</p>
+      </div>
+      <div class="dealership-location volvo-cars-box-middle">
+        <a [href]="'https://www.google.com/maps/dir/?api=1&destination=' + this.dealerShip?.location_lat + ',' + this.dealerShip?.location_lng"
+          target="_blank"><span class="text-white"><i
+              class="fa fa-map-marker"></i>&nbsp;{{dealerShip?.location}}</span></a>
+      </div>
+      <div class="accordion opening_hours row">
+        <div class="accordion-item">
+          <h2 class="accordion-header">
+            <button class="accordion-button collapsed mb-0 text-white" type="button" data-bs-toggle="collapse"
+              data-bs-target="#collapseOpeningHours">
+              OPENING HOURS
+            </button>
+          </h2>
+          <div id="collapseOpeningHours" class="accordion-collapse collapse">
+            <div class="accordion-body pt-0">
+              <div class="volvo-cars-box-bottom">
+                <div class="volvo-cars-box-bottom-info">
+                  <p *ngFor="let openingHours of dealerShip?.location_opening_hours_text.split(',')">
+                    {{openingHours}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row contact_wrapper">
+        <button class="col-12 apply_online_btn" [routerLink]="applyOnlineRoute" *ngIf="applyOnlineButtonRequired">
+          <img src="assets/images/double-tick-icon.svg" class="img-fluid" alt=""> Apply Online
+        </button>
+        <button class="inquiry_btn col-12" *ngIf="inquiryButtonRequired" (click)="emitEventToParent('inquiry')">
+          <i class="fa fa-envelope"></i>&nbsp;
+          Inquiry
+        </button>
+        <button class="call_btn col-md-4 col-12 chat_with_dealer_btn pl-0" (click)="openChatMiniBox()"><img
+            src="assets/images/chat-icon.svg" class="img-fluid" alt="">
+          Chat
+        </button>
+        <div class="col-md-4 col-12 pr-0">
+          <button class="call_btn col-12">
+            <a class="text-decoration-underline phone_btn_font" [href]="'tel:' +this.dealerShip?.business_phone">
+              <i class="fa fa-phone"></i>&nbsp;
+              {{this.dealerShip?.business_phone}}
+            </a>
+          </button>
+        </div>
+        <div class="col-md-4 col-12 pr-0">
+          <button class="col-12 directions_btn">
+            <a target="_blank" [href]="destinationUrl" class="btn btn--get-directions get_direction">
+              Directions
+            </a>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+
+  </div>
+</div>

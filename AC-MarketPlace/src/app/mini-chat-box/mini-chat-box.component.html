@@ -1,0 +1,18 @@
+<div class="chat_container">
+
+  <!-- Chat Floating Button -->
+  <button type="button" (click)="openOrClose=!openOrClose" title="Chat Button" class="btn chat_btn">
+    <i class="fas fa-comments" *ngIf="!openOrClose"></i>
+    <i class="fas fa-times" *ngIf="openOrClose"></i>
+  </button>
+
+  <!-- Chat Window -->
+  <div class="chat_window" id="chat_window"
+    [ngStyle]="{'display': openOrClose==true ? 'block' : 'none' }">
+    <div class="chat_body">
+      <iframe [src]="iframeUrl ? (iframeUrl | safe) : null" width="100%" height="100%">
+      </iframe>
+    </div>
+  </div>
+
+</div>

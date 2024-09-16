@@ -1,0 +1,53 @@
+<!-- SECTION FEEDBACK -->
+<section class="feedback" style="display: none;">
+  <div class='feedback__container'>
+    <div class="feedback__header">
+      <div class="feedback__title">Our Customer Feedback</div>
+      <div class="feedback__text">Don’t take our word for it. Trust our customers</div>
+
+      <!-- If you need buttons for navigation (left/right)-->
+      <button type="button" class="feedback-button-prev" (click)="prev()"><span></span></button>
+      <button type="button" class="feedback-button-next" (click)="next()"><span></span></button>
+    </div>
+
+    <!-- SLider wrapper -->
+    <div class="feedback__slider swiper">
+      <!-- The moving part of the slider -->
+      <ngx-slick-carousel #slickModal="slick-carousel" class="feedback__wrapper swiper-wrapper carousel testimonials-main" [config]="slideConfig">
+        <!-- Slide -->
+
+        <div ngxSlickItem *ngFor="let testimonial of testimonials"  class="feedback__slide swiper-slide">
+            <!-- <ngx-slick-carousel class="carousel testimonials-main" [config]="slideConfig"> -->
+            <div class="feedback__item">
+              <div class="item-feedback">
+                <div class="item-feedback__header">
+                  <img class="item-feedback__photo" [src]="testimonial?.avatar" alt="Floyd Miles">
+                  <div class="item-feedback__rating">
+                    <img src="assets/images/star.svg" alt="star">
+                    <img src="assets/images/star.svg" alt="star">
+                    <img src="assets/images/star.svg" alt="star">
+                    <img src="assets/images/star.svg" alt="star">
+                    <img src="assets/images/star.svg" alt="star">
+                  </div>
+                </div>
+                <div class="item-feedback__name">{{testimonial?.user_name}}</div>
+                <div class="item-feedback__text">
+                  {{testimonial?.description}}
+                </div>
+              </div>
+            </div>
+          <!-- </ngx-slick-carousel> -->
+          </div>
+          <!-- end of Slide -->
+        </ngx-slick-carousel>
+      <!-- If you need buttons for navigation (left/right)
+          <button type="button" class="feedback-button-prev">444</button>
+          <button type="button" class="feedback-button-next">555</button> -->
+
+      <div class="feedback-pagination"></div>
+    </div>
+
+
+  </div>
+</section>
+<!-- End of SECTION FEEDBACK -->

@@ -1,0 +1,7 @@
+.input-file{
+  width: 60%;
+}
+.showLoader{
+  opacity: 0.4;
+  pointer-events: none;
+}

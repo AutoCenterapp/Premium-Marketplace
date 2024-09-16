@@ -1,0 +1,18 @@
+.main-list>li{
+  list-style-type: disc;
+  margin-left: 30px;
+  line-height: 20px;
+  padding: 5px;
+}
+.main-list>li>.terms-sub-heading{text-decoration: underline;  color: #0C2434 !important; font-weight: 600}
+.sub-list>li{
+  list-style-type: circle;
+  margin-left: 50px;
+  padding: 5px;
+  line-height: 20px;
+}
+.sub-list>li>.title{color: #0C2434;font-weight: 500}
+a>b{
+  font-size: 15px;
+  color: #0C2434;
+}

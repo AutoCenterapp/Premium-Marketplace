@@ -1,0 +1,30 @@
+<form name="buying-form" class="buying__form" action="#" method="post">
+    <!-- <input type="text" name="buying-input" data-error="Error" placeholder="Search by make, model, or keyword" class="buying__input"> -->
+    <mat-form-field floatLabel='never' class="example-full-width">
+      <input (input)="searchAgainstCharacter()" (keydown.enter)="applySearch()" [value]="selectedModel?.title" matInput [(ngModel)]="selectedModel" [matAutocomplete]="auto"
+        [formControl]="searchVehiclesCtrl" placeholder="Search by make, model, or keyword" >
+      <button *ngIf="selectedModel" matSuffix mat-icon-button aria-label="Clear" (click)="clearSelection()">
+        <i class="fa fa-close"></i>
+      </button>
+      <mat-autocomplete [panelWidth]="500" #auto="matAutocomplete"  (optionSelected)="onSelected()"
+        [displayWith]="displayWith">
+        <mat-option *ngIf="isLoading" class="is-loading">Loading...</mat-option>
+        <ng-container *ngIf="!isLoading">
+          <ng-container *ngIf="filteredVehicles && filteredVehicles.length>0; else noDataFound">
+            <mat-option [value]="this.searchVehiclesCtrl.value">
+              <span><i class="fas fa-search cusom_search_icon_style"></i>{{this.searchVehiclesCtrl.value}}</span>
+            </mat-option>
+            <mat-option *ngFor="let vehicle of filteredVehicles" [value]="vehicle">
+              <span><i class="fas fa-search cusom_search_icon_style"></i>{{vehicle?.title}}</span>
+            </mat-option>                    
+          </ng-container>
+          <ng-template #noDataFound>
+              <mat-option>
+                <span>{{this.searchVehiclesCtrl.value.length==0?'Please make your search': 'Not data found!'}}</span>
+              </mat-option>
+          </ng-template>
+        </ng-container>
+      </mat-autocomplete>
+    </mat-form-field>
+    <button type="submit" class="buying__search-button" (click)="applySearch()"></button>
+  </form>

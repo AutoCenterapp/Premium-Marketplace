@@ -1,0 +1,7 @@
+.error_msg p {
+    color: #d32424;
+    padding-top: 6px;
+}
+button.submitNewsLetterForm:disabled{
+    background-color: #0c2434b5;
+}

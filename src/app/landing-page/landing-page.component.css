@@ -1,0 +1,25 @@
+.coming_soon_modal{
+  margin:0;
+  padding:0;
+  padding:15vh 0px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:50pt;
+}
+.coming_soon_modal span{
+  color: #0C2434;
+  padding: 1rem;
+  text-align: center;
+  animation-name: fade-in;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

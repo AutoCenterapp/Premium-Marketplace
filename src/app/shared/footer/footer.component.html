@@ -1,0 +1,146 @@
+<footer class="footer" id="footer-view" >
+  <div class="footer__container">
+
+    <!-- FOOTER TOP SECTION -->
+    <section class="footer-top">
+
+      <!-- start footer-links -->
+      <div class="footer-links">
+
+        <div class="footer-links__block footer-links__block_small">
+          <h4 class="footer-links__title">Customers</h4>
+          <ul>
+            <li><a routerLink="/">Buy From AutoCenter</a></li>
+            <li class="d-none"><a href="">Sell/Trade</a></li>
+            <li class="d-none"><a href="">Referrals</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links__block">
+          <h4 class="footer-links__title">Company</h4>
+          <ul>
+            <li><a routerLink="about">About us</a></li>
+            <li><a href="" class="d-none">Customer Reviews</a></li>
+            <li><a href="" class="d-none">Press</a></li>
+            <li><a href="" class="d-none">Blog</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links__block footer-links__block_big">
+          <h4 class="footer-links__title">Terms</h4>
+          <ul>
+            <li><a routerLink="terms-of-service">Terms of Service</a></li>
+            <li><a routerLink="privacy-policy">Privacy Policy</a></li>
+            <li><a href="">Do not Sell My Personal</a></li>
+            <li><a href="">Information (CA Residents Only)</a></li>
+            <li><a href="">Interest-Based Advertising</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links__block">
+          <h4 class="footer-links__title">Dealers</h4>
+          <ul>
+            <li><a href="http://acnetwork.com/" target="_blank">Sell On AutoCenter</a></li>
+            <li><a href="" class="d-none">Dealer Management</a></li>
+            <li><a href="https://admin.autocenter.com/">Dealer Login</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-links__block footer-links__block_small">
+          <h4 class="footer-links__title">Support</h4>
+          <ul>
+            <li><a href="">Contact Us</a></li>
+            <li><a href="" class="d-none">Help</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-form">
+          <h4 class="footer-form__title">Keep in Touch</h4>
+
+          <form [formGroup]="addNewsLetterForm" (ngSubmit)="onSubmitForm()" name="footer-form__subscribe"
+            class="footer-form__form">
+            <input type="text" formControlName="email" name="footer-form__email" data-error="Error"
+              placeholder="Enter your email" class="input">
+            <button type="submit" class="button submitNewsLetterForm" [disabled]="loadingData">
+              <span *ngIf="!loadingData">Subscribe</span>
+              <img *ngIf="loadingData" style="width: 20px" src="assets/images/icons/loading-gif.gif" alt="load">
+            </button>
+          </form>
+          <div class="error_msg" *ngIf="email?.invalid && (email?.dirty || email?.touched)">
+            <p *ngIf="email?.errors?.['required']">
+              Email is required.
+            </p>
+            <p *ngIf="email?.errors?.['error']">
+              {{ email?.errors?.['error'] }}
+            </p>
+            <p *ngIf="email?.errors?.['invalid']">
+              {{ email?.errors?.['invalid']}}
+            </p>
+            <p *ngIf="email?.errors?.['pattern']">
+              Please enter a valid email address.
+            </p>
+            <p *ngIf="email?.errors?.['error']">{{email?.errors?.['error']}}</p>
+          </div>
+
+          <div class="footer-form__text">Get Latest Updates and Offers</div>
+        </div>
+
+      </div>
+      <!-- end footer-links -->
+
+    </section>
+    <!-- End of FOOTER TOP SECTION -->
+
+
+    <!-- FOOTER CENTER BLOCK -->
+    <div class="footer-center">
+      <div class="footer-logo">
+        <a href="/">
+          <img src="assets/images/Marketplace Logo.png" alt="logo">
+        </a>
+      </div>
+      <nav class="footer-nav">
+        <ul>
+          <li>
+            <a routerLink="/">Home</a>
+          </li>
+          <li>
+            <a routerLink="/marketplace">Marketplace</a>
+          </li>
+          <li>
+            <a routerLink="/dealership">Dealerships</a>
+          </li>
+          <li>
+            <a routerLink="/offers">My Offers</a>
+          </li>
+          <li>
+            <a routerLink="/signup">Sign Up</a>
+          </li>
+        </ul>
+      </nav>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/autocenterapp" target="_blank">
+          <img src="assets/images/icons/facebook.svg" alt="facebook">
+        </a>
+        <a href="https://www.instagram.com/officialautocenter" target="_blank">
+          <img src="assets/images/icons/instagram.svg" alt="instagram">
+        </a>
+        <a href="https://twitter.com/autocenterapp" target="_blank">
+          <img src="assets/images/icons/twitter.svg" alt="twitter">
+        </a>
+        <a href="https://www.linkedin.com/company/autocenterapp" target="_blank">
+          <img src="assets/images/icons/linkedin.svg" alt="linkedin">
+        </a>
+      </div>
+    </div>
+    <!-- FOOTER CENTER BLOCK -->
+
+
+    <!-- FOOTER TOP BLOCK -->
+    <div class="footer-bottom">
+      <span>AutoCenter ©2022. All right reserved.</span>
+    </div>
+    <!-- FOOTER BOTTOM BLOCK -->
+  </div>
+</footer>
+

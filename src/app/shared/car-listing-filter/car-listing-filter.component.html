@@ -1,0 +1,341 @@
+<!-- if needed old advance search just replace the code with commit of date 1/28/2023 and name marketPlaceViewChange -->
+<div class="modal-header filtersButtonMob">
+  <h5 class="modal-title" id="exampleModalLabel">Advance Search Modal</h5>
+  <button type="button" class="btn-close" aria-label="Close" (click)="closeModal()"></button>
+</div>
+<!-- zip code portion starts -->
+<div class="dashbord-left-inner-main modal-body">
+  <div class="dashbord-left-inner">
+    <div class="dashbord-left-inner-wrapper mb-1">
+      <h6 class="dashbord-left-main-filter-title d-flex justify-content-between align-items-center">Zip Code Filter
+        <a (click)="clearFiltersEvent()" class="btn btn--dashbord-left-reset w-auto text-decoration-underline">
+          Reset Filter
+        </a>
+      </h6>
+      <div class="applied_filters_wrapper">
+        <span class="search_title_wrapper" *ngIf="locationForm.controls.zip_code.value">
+          <span class="searched_title">
+           Zip Code: {{locationForm.controls.zip_code.value}}
+          </span>
+          <i class="fa fa-close" (click)="this.locationForm.controls.zip_code.reset();this.clearFilters.emit('zipCodeSearch')"></i>
+        </span>
+        <span class="search_title_wrapper" *ngIf="locationForm.controls.radius.value && locationForm.controls.zip_code.value">
+          <span class="searched_title" [ngStyle]="{'border-right':this.locationForm.controls.radius.value!='Nationwide' ? '1px solid black' : 'none' }">
+            Radius: {{locationForm.controls.radius.value=='Nationwide'?locationForm.controls.radius.value:locationForm.controls.radius.value + ' Miles'}}
+          </span>
+          <i *ngIf="this.locationForm.controls.radius.value!='Nationwide'" class="fa fa-close" (click)="this.locationForm.controls.radius.reset();this.locationForm.controls.radius.setValue(this.radiusArray[10]);emitValueToParentToGetVehiclesAGainstZipCode()"></i>
+        </span>
+      </div>
+      <div class="row" [formGroup]="locationForm">
+        <div class="input-field col-12 ngb_dropdown position-relative">
+          <input formControlName="zip_code" type="text" class="form-control" placeholder="Enter Zip Code">
+          <div class="form-control" *ngIf="zip_code?.invalid && (zip_code?.dirty || zip_code?.touched)"
+            class="alert alert-danger mt-2 mb-0">
+            <div *ngIf="zip_code?.errors?.['required']">
+              Zip code is required.
+            </div>
+          </div>
+        </div>
+        <div class="col-12">
+          <div class="input-field">
+            <select formControlName="radius" class="form-select form-select-lg d-input-s" required>
+              <option *ngFor="let radius of radiusArray" [ngValue]="radius" selected>
+                {{radius=='Nationwide'?radius: radius +' Miles'}}</option>
+            </select>
+          </div>
+        </div>
+        <!-- <div class="dropdown input-field">
+          <button class="btn btn-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            {{bodyStyle?.name}}
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li value="New" class="disabled"><a class="dropdown-item">Select Radius</a></li>
+            <li *ngFor="let radius of radiusArray"><a class="dropdown-item">{{radius=='Nationwide'?radius: radius +'
+                Miles'}}</a></li>
+          </ul>
+        </div> -->
+      </div>
+    </div>
+    <div class="dashbord-left-inner-wrapper mb-1">
+      <div class="d-grid gap-2">
+        <button *ngIf="!showLoader" (click)="emitValueToParentToGetVehiclesAGainstZipCode()" class="btn btn-lg btn-primary btn--primary" type="button">Apply   
+        </button>
+        <button *ngIf="showLoader" style="gap: 15px;" disabled class="btn btn-lg btn-primary btn--primary" type="button">Loading Data   
+          <i class="fas fa-spinner fa-spin"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- zip code portion ends -->
+<!-- Advance search portion -->
+<div class="dashbord-left-inner-main modal-body">
+  <div class="dashbord-left-inner">
+    <div class="dashbord-left-inner-wrapper">
+      <h6 class="dashbord-left-main-filter-title d-flex justify-content-between align-items-center">Search Filters
+        <a (click)="resetAllFilters()" class="btn btn--dashbord-left-reset w-auto text-decoration-underline">
+          Reset Filter
+        </a>
+      </h6>
+      <div class="applied_filters_wrapper">
+        <span class="search_title_wrapper" *ngIf="make!=undefined">
+          <span class="searched_title">
+            {{make?.title}}
+          </span>
+          <i class="fa fa-close" (click)="make=undefined;advanceSearch()"></i>
+        </span>
+        <span class="search_title_wrapper" *ngIf="model!=undefined">
+          <span class="searched_title">
+            {{model?.title}}
+          </span>
+          <i class="fa fa-close" (click)="model=undefined;advanceSearch()"></i>
+        </span>
+        <span class="search_title_wrapper" *ngIf="bodyStyle.name!='Select Body Style'">
+          <span class="searched_title">
+            {{bodyStyle?.name}}
+          </span>
+          <i class="fa fa-close" (click)="bodyStyle={'name': 'Select Body Style','id': 0};advanceSearch()"></i>
+        </span>
+        <span class="search_title_wrapper" *ngIf="condition!='Condition'">
+          <span class="searched_title">
+            {{condition}}
+          </span>
+          <i class="fa fa-close" (click)="condition='Condition';advanceSearch()"></i>
+        </span>
+        <span class="search_title_wrapper" *ngIf="color!=undefined">
+          <span class="searched_title">
+            {{color?.title}}
+          </span>
+          <i class="fa fa-close" (click)="color=undefined;advanceSearch()"></i>
+        </span>
+        <span class="search_title_wrapper" *ngIf="yeargte!='' || yeargte!=''">
+          <span class="searched_title">
+            {{yearlte}} - {{yeargte}}
+          </span>
+          <i class="fa fa-close" (click)="yearlte=''; yeargte = '';advanceSearch()"></i>
+        </span>
+        <span class="search_title_wrapper" *ngIf="pricelte!=0 && pricegte!=0">
+          <span class="searched_title">
+            {{pricelte}} - {{pricegte}}
+          </span>
+          <i class="fa fa-close" (click)="pricelte=0; pricegte = 0; this.resetRadioButton();advanceSearch()"></i>
+        </span>
+        <span class="search_title_wrapper" *ngIf="pricelte!=0 && pricegte==0">
+          <span class="searched_title">
+            Price less than {{pricelte}}
+          </span>
+          <i class="fa fa-close" (click)="pricelte=0; this.resetRadioButton();advanceSearch()"></i>
+        </span>
+      </div>
+      <div class="row">
+        <div class="dropdown input-field col-6">
+          <input placeholder="From Year" [ngModel]="yearlte" (focus)="suggestValueDropdown('yearslte',$event)"
+            (input)="suggestValueDropdown('yearslte',$event)" class="btn text-left btn-dropdown-toggle" type="text"
+            data-bs-toggle="dropdown" aria-expanded="false">
+
+          <ul class="dropdown-menu col-10 w-100 date_dropdown" aria-labelledby="dropdownMenuButton1">
+            <li *ngFor="let item of yearslte" (click)="this.yearlte = item"><a class="dropdown-item">{{item}}</a></li>
+          </ul>
+        </div>
+        <div class="dropdown input-field col-6">
+          <input placeholder="To Year" [ngModel]="yeargte" (focus)="suggestValueDropdown('yearsgte',$event)"
+            (input)="suggestValueDropdown('yearsgte',$event)" class="btn text-left btn-dropdown-toggle" type="text"
+            data-bs-toggle="dropdown" aria-expanded="false">
+          <ul class="dropdown-menu col-10 w-100 date_dropdown" aria-labelledby="dropdownMenuButton1">
+            <li *ngFor="let item of yearsgte" (click)="this.yeargte = item"><a class="dropdown-item">{{item}}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="input-field col-12 ngb_dropdown position-relative">
+        <input *ngIf="makes && makes.length>0; else loadingMakesOverlay" onmouseover="this.select()"
+          id="typeahead-prevent-manual-entry" type="text" class="form-control" [(ngModel)]="make"
+          [ngbTypeahead]="searchMake" (input)="makefocus$.next($any($event).target.value)"
+          (blur)="this.getModels(make?.id)" (click)="makeclick$.next($any($event).target.value);"
+          #makeinstance="ngbTypeahead" [inputFormatter]="formatter" [resultFormatter]="formatter" [editable]="false"
+          placeholder="Select Makes" />
+        <ng-template #loadingMakesOverlay>
+          <div class="loadingDataOverlay"><span>Loading Makes <i class="fas fa-spinner fa-spin"></i></span></div>
+        </ng-template>
+      </div>
+      <div class="input-field col-12 ngb_dropdown position-relative">
+        <input *ngIf="models && models.length>0; else loadingModelsOverlay" onmouseover="this.select()"
+          id="typeahead-prevent-manual-entry" type="text" class="form-control" [(ngModel)]="model"
+          [ngbTypeahead]="searchModel" (input)="modelfocus$.next($any($event).target.value)"
+          (click)="modelclick$.next($any($event).target.value)" #modelinstance="ngbTypeahead"
+          [inputFormatter]="formatter" [resultFormatter]="formatter" [editable]="false" placeholder="Select Model" />
+        <ng-template #loadingModelsOverlay>
+          <div class="loadingDataOverlay"><span>Loading Models <i class="fas fa-spinner fa-spin"></i></span></div>
+        </ng-template>
+      </div>
+      <div class="dropdown input-field">
+        <button class="btn btn-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{bodyStyle?.name}}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li value="New" class="disabled"><a class="dropdown-item">Select Body Style</a></li>
+          <li *ngFor="let item of bodyStyles" (click)="this.bodyStyle = item"><a
+              class="dropdown-item">{{item?.name}}</a></li>
+        </ul>
+      </div>
+      <div class="dropdown input-field">
+        <button class="btn btn-dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{condition}}
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+          <li value="New" class="disabled"><a class="dropdown-item">Condition</a></li>
+          <li value="New" (click)="this.condition = 'New'"><a class="dropdown-item">New</a></li>
+          <li value="Used" (click)="this.condition = 'Used'"><a class="dropdown-item">Used</a></li>
+        </ul>
+      </div>
+      <div class="input-field col-12 ngb_dropdown position-relative">
+        <input *ngIf="colors && colors.length>0; else loadingDataOverlay" onmouseover="this.select()"
+          id="typeahead-prevent-manual-entry" type="text" class="form-control" [(ngModel)]="color"
+          [ngbTypeahead]="searchColor" (input)="colorfocus$.next($any($event).target.value)"
+          (click)="colorclick$.next($any($event).target.value)" #colorinstance="ngbTypeahead"
+          [inputFormatter]="formatter" [resultFormatter]="formatter" [editable]="false" placeholder="Select Color" />
+        <ng-template #loadingDataOverlay>
+          <div class="loadingDataOverlay"><span>Loading Makes <i class="fas fa-spinner fa-spin"></i></span></div>
+        </ng-template>
+      </div>
+    </div>
+    <!-- <div class="dashbord-left-inner-wrapper">
+      <h6 class="dashbord-left-filter-title">Mileage</h6>
+      <div class="row">
+        <div class="col input-field">
+          <input type="text" class="form-control" placeholder="Min" [(ngModel)]="mileagelte">
+        </div>
+        <div class="col input-field">
+          <input type="text" class="form-control" placeholder="Max" [(ngModel)]="mileagegte">
+        </div>
+      </div>
+    </div> -->
+    <div class="dashbord-left-inner-wrapper">
+      <h6 class="dashbord-left-filter-title">Price</h6>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="flexCheckChecked1" name="price_range"
+          (change)="pricelte=10000; customPriceSelection = false">
+        <label class="form-check-label" for="flexCheckChecked">
+          Below $10,000
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" id="flexCheckChecked2" type="radio" name="price_range"
+          (change)="pricelte=15000; customPriceSelection = false">
+        <label class="form-check-label" for="flexCheckDefault">
+          Below $15,000
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" id="flexCheckChecked3" type="radio" name="price_range"
+          (change)="pricelte=25000; customPriceSelection = false">
+        <label class="form-check-label" for="flexCheckDefault">
+          Below $25,000
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" id="flexCheckChecked4" type="radio" name="price_range" (change)="customPriceSelection = true">
+        <label class="form-check-label" for="flexCheckDefault">
+          Custom
+        </label>
+      </div>
+      <ng-container *ngIf="customPriceSelection">
+        <div class="row">
+          <div class="col input-field">
+            <input type="number" class="form-control" placeholder="Min" min="1" (focusout)="numberOnly($event)"
+              [(ngModel)]="pricegte">
+          </div>
+          <div class="col input-field">
+            <input type="number" class="form-control" placeholder="Max" [(ngModel)]="pricelte">
+          </div>
+        </div>
+        <ngx-slider [(value)]="pricegte" [(highValue)]="pricelte" [options]="slider"></ngx-slider>
+      </ng-container>
+    </div>
+    <!-- <div class="dashbord-left-inner-wrapper">
+      <h6 class="dashbord-left-filter-title">Fuel Type</h6>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" id="flexCheckChecked" name="fuel_type" checked
+          (change)="fuel_type='Diesel'">
+        <label class="form-check-label" for="flexCheckChecked">
+          Diesel
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="fuel_type" (change)="fuel_type='Petrol'">
+        <label class="form-check-label" for="flexCheckDefault">
+          Petrol
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="fuel_type" (change)="fuel_type='Electric'">
+        <label class="form-check-label" for="flexCheckDefault">
+          Electric
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="fuel_type" (change)="fuel_type='Hyrbid'">
+        <label class="form-check-label" for="flexCheckDefault">
+          Hyrbid
+        </label>
+      </div>
+    </div> -->
+    <!-- <div class="dashbord-left-inner-wrapper">
+      <h6 class="dashbord-left-filter-title">Transmission</h6>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox">
+        <label class="form-check-label" for="flexCheckDefault">
+          Automatic (6,676)
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox">
+        <label class="form-check-label" for="flexCheckChecked">
+          Manual (9,784)
+        </label>
+      </div>
+    </div>
+    <div class="dashbord-left-inner-wrapper">
+      <h6 class="dashbord-left-filter-title">Features</h6>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox">
+        <label class="form-check-label" for="flexCheckDefault">
+          Adaptive Cruise Control (6,676)
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox">
+        <label class="form-check-label" for="flexCheckChecked">
+          Cooled Seats (9,784)
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox">
+        <label class="form-check-label" for="flexCheckDefault">
+          Keyless Start (9,784)
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox">
+        <label class="form-check-label" for="flexCheckChecked">
+          Navigation System (9,784)
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox">
+        <label class="form-check-label" for="flexCheckChecked">
+          Remote Start (9,784)
+        </label>
+      </div>
+    </div> -->
+    <div class="dashbord-left-inner-wrapper">
+      <div class="d-grid gap-2">
+        <button *ngIf="!showLoader" (click)="advanceSearch()" class="btn btn-lg btn-primary btn--primary" type="button">Apply   
+        </button>
+        <button *ngIf="showLoader" style="gap: 15px;" disabled class="btn btn-lg btn-primary btn--primary" type="button">Loading Data   
+          <i class="fas fa-spinner fa-spin"></i>
+        </button>
+        <!-- <button (click)="advanceSearch()" class="btn btn-lg btn-primary btn--primary" type="button">Apply</button> -->
+      </div>
+    </div>
+  </div>
+</div>

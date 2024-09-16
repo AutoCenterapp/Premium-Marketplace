@@ -1,0 +1,259 @@
+<div class="dashbord-left">
+  <div class="car_details_card">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex flex-column">
+        <span class="highlighted_content">{{vehicle?.title}}</span>
+        <span class="underlined_content">{{vehicle?.vehicleModel?.title}}</span>
+      </div>
+      <div class="like_btn">
+        <div *ngIf="checkIfLogin()">
+          <div>
+            <img style="cursor: pointer;" (click)="!isSaved?addSavedVehicles():removeSavedVehicles()"
+              title="Mark as Saved" width="40px"
+              [src]="!isSaved?'assets/images/heart-save-icon-unfilled.svg':'assets/images/heart-save-icon.svg'" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-start">
+      <div class="d-flex flex-column">
+        <span class="highlighted_content"> {{vehicle?.price | currency }}</span>
+        <span class="underlined_content" (click)="scrollToCalc('estimation_calc_wrapper')"
+          style="color:#5689c4; cursor: pointer;"><i class="fa-solid fa-calculator"
+            style="margin-right: 6px;"></i>Estimated Payment</span>
+      </div>
+      <div class="d-flex flex-column">
+        <span class="highlighted_content"> {{vehicle?.mileage}} miles</span>
+<!--        <span class="underlined_content">39/125 rpm</span>-->
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <div class="d-flex">
+        <span class="underlined_content"> Stock # {{vehicle?.stock_id}} . </span>
+        <span class="underlined_content"> VIN # {{vehicle?.VIN}}</span>
+      </div>
+    </div>
+  </div>
+  <app-dealership-card [dealerShip]="dealerShip" [inquiryButtonRequired]="true" [chatWithDealerButtonRequired]="true"
+  [applyOnlineRoute]="'/apply-online/'+dealerShip?.slug+'/'+vehicle.slug"
+  [applyOnlineButtonRequired]="true"
+  (valueChange)="eventReceivedFromChild($event)"></app-dealership-card>
+  <!-- <div class="btns_wrapper">
+    <button (click)="navigateToApplyOnline()" [routerLink]="'/apply-online/'+dealerShip?.slug+'/'+vehicle.slug" class="btn btn-demo-started btn-buy mb-0 mt-2">
+      <img src="assets/images/double-tick-icon.svg" class="img-fluid" alt=""> Apply Online
+    </button>
+    <button (click)="accepTermsAndConditions()"
+      class="btn btn-demo-started btn-default add_query_btn mb-0 mt-2">
+      <i class="fa fa-envelope"></i> Inquiry
+    </button>
+    <button (click)="openChatMiniBox()"
+      class="btn btn-demo-started btn-chat mb-0 mt-2"><img src="assets/images/chat-icon.svg" class="img-fluid" alt="">
+      Chat With Dealer
+    </button>
+  </div> -->
+  <div class="dashbord-left mt-2" style="margin-bottom:20px">
+    <div class="dashbord-left-inner-main bg-white">
+      <div class="dashbord-left-inner">
+        <table class="table feature-table">
+          <tbody>
+
+            <tr>
+              <th colspan="2" class="tb-head">
+                <h6 class="feature-title">Specification</h6>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <h6 class="spec-title-text">VIN</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.VIN}}</p>
+              </td>
+            </tr>
+            <tr>
+
+              <td>
+                <h6 class="spec-title-text">Make</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.vehicleMake?.title}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6 class="spec-title-text">Model</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.vehicleModel?.title}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6 class="spec-title-text">Type</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.vehicleType?.name}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6 class="spec-title-text">Color</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.vehicleColor?.name}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6 class="spec-title-text">Drive Type</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.vehicleDriveType?.name}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6 class="spec-title-text">Transmission</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.transmission}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6 class="spec-title-text">Condition</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.condition}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6 class="spec-title-text">Year</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.year}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6 class="spec-title-text">Mileage</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.mileage}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6 class="spec-title-text">Fuel Type</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.fuel_type}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6 class="spec-title-text">Engine Size</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.engine_size}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6 class="spec-title-text">Doors</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.doors}}</p>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <h6 class="spec-title-text">Cylinders</h6>
+              </td>
+              <td>
+                <p class="spec-detail-text">{{vehicle?.cylinders}}</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-demo-started btn-chat" (click)="print()"><img src="assets/images/profit-report-icon.svg"
+      class="img-fluid" alt=""> Brochure
+  </button>
+  <div class="estimation_calc_wrapper dashbord-left-inner-main bg-white">
+    <div class="estimated_price_box">
+      <div class="estimated_price">
+        <h5>Your estimated payment is</h5>
+        <span class="estimated_price_val">
+          <h4>${{estimatedPayment | number : '1.2-2'}}<span class="month"> /mo*</span></h4>
+        </span>
+      </div>
+      <div class="vehicle_price">
+        <h5>Vehicle Price {{vehicle?.price | currency }}</h5>
+      </div>
+    </div>
+    <div class="donw_payment_box">
+      <label class="label">Down Payment($)</label>
+      <div>
+        <input placeholder="$0" type="number" [(ngModel)]="downPayment" (keyup)="calculateEstimatedPrice()">
+      </div>
+    </div>
+    <div class="credit_score_box">
+      <label>Credit Score</label>
+      <div class="d-flex">
+        <div class="general_box" *ngFor="let cs of creditScore" [ngClass]="{'active': cs.selected}"
+          (click)="makeSelection(creditScore, cs, 'cs'); calculateEstimatedPrice()">
+          <span>{{cs.title}}</span>
+          <span>{{cs.range}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="loan_term_box">
+      <label>Duration</label>
+      <div class="d-flex">
+        <div class="general_box" *ngFor="let ln of loanTerm" [ngClass]="{'active': ln.selected}"
+          (click)="makeSelection(loanTerm, ln, 'ln'); calculateEstimatedPrice()">
+          <span class="duration_text">{{ln.title}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #termsAndConditionModal let-modal>
+
+  <div class="modal-header">
+    <h4 class="modal-title">Terms & Conditions</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true"><i class="fas fa-times"></i></span>
+    </button>
+  </div>
+  <!-- Modal body -->
+  <div class="modal-body terms_and_conditions_modal">
+    By clicking "Accept & Submit",I,the undersigned,<br>(a) for the purpose of security card, certify the below
+    representation to be correct;<br>(b) authorize the financial institutions, as they consider necessary and
+    appropriate, to obtain consumer credit reports on me periodically and to gather employment history and<br>(c)
+    understand that we, or any financial institutions to whome this application is submitted, will retain this
+    application whether or not it is the applicant's responsibility to notify the creditor or any change of name,
+    address, or employment. We and any financial institution to whom this application is submitted, may share
+    certain non-public personal information about you with your authorization or as provided by law<br><br>
+    <div class="form-check d-flex align-items-center">
+      <input class="form-check-input" [(ngModel)]="iAcceptTerms" type="checkbox" id="check1" name="option1" value="ok">
+      <label class="form-check-label px-3">I accept the above terms.</label>
+    </div>
+  </div>
+
+  <!-- Modal footer -->
+  <div class="modal-footer">
+    <button [ngStyle]="{'opacity': iAcceptTerms==true ? '1' : '0.4' }" type="button"
+      class="btn btn-demo-started btn-danger accept_terms_btn" (click)="iAcceptTerms?termsAndConditionsAccepted():1"
+      data-bs-dismiss="modal">Submit
+    </button>
+  </div>
+</ng-template>

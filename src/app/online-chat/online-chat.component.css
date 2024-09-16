@@ -1,0 +1,32 @@
+.top_dark {
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .modal-close-button {
+    margin: 8px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    justify-content: flex-end;
+    float: right;
+  }
+  .form-box {
+    min-height: calc(100vh)!important;
+    background: #ffffff;
+    box-shadow: 0px 4px 65px rgb(112 125 155 / 20%);
+    border-radius: 4px;
+    box-sizing: border-box;
+    padding: 10px 0px;
+    overflow-y: auto;
+  }
+  .header-box {
+    background: #ffffff;
+  }
+  .header-box img {
+    width: 250px;
+    height: 70px !important;
+  }
+  iframe{
+    height: calc(100vh)!important;
+  }

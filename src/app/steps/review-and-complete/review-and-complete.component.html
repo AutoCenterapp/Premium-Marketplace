@@ -1,0 +1,141 @@
+<section class="section section-dashbord-main">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="dashbord-left">
+          <h2 class="dashboard-left-title">Step 3# <br> Review & Complete</h2>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-8">
+            <div class="top-pre-approved-box">
+              <div class="row">
+                <div class="col-md-7 col-12">
+                  <div class="approved-text"><img src="assets/images/double-tick-icon.svg" class="img-fluid" alt="">
+                    You'r Approved</div>
+                </div>
+                <div class="col-md-5 col-12">
+                  <a href="#" class="agent-btn">
+                    <div class="chat-agent">
+                      Select Your Offer Now <img src="assets/images/thin_big_right.svg" class="img-fluid right-arrow"
+                        alt="">
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+
+            </div>
+            <div class="car-model-assets/images">
+              <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner position-relative" id="car-model">
+                  <div class="d-flex product-info-icons align-items-center">
+                    <div><span class="badge-info badge-sm" >{{lead?.vehicle?.condition | uppercase}} CAR - IN STOCK</span></div>
+                    <div class="d-flex"><img src="assets/images/views-icon.svg" class="img-fluid">
+                      <span class="views-number">{{lead?.vehicle?.viewCount }} Views</span>
+                    </div>
+                    <div class="d-flex"><img src="assets/images/heart-save-icon.svg" class="img-fluid">
+                      <span class="views-number">{{lead?.vehicle?.saveCount }} Saves</span>
+                    </div>
+                  </div>
+                  <div class="carousel-item" *ngFor="let slide of lead?.vehicle?.images; let i = index"
+                       [ngClass]="slide?.is_banner == 1? 'active': ''">
+                    <img [src]="slide?.image_path" class="d-block w-100" alt="no image here">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+
+              <ul class="cars-list" id="cars-list" *ngIf="lead?.vehicle?.images && lead?.vehicle?.images.length>0">
+                <li *ngFor="let image of lead?.vehicle?.images | imageSort"><img [src]="image?.image_path" class="model-img">
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4" *ngIf="lead?.vehicle?.length!=0 && this.lead.length!=0">
+            <app-car-details-right-side [vehicle]="lead?.vehicle"></app-car-details-right-side>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <div class="col-md-12 col-12">
+            <div class="document-upload-box" [ngClass]="{
+              'new-offer': lead?.lead_state=='New'}">
+              <p class="upload-document-title"
+                *ngIf="lead?.lead_state=='New' || lead?.lead_state=='Documents Requested'">Upload Documents</p>
+              <p class="upload-document-title" *ngIf="lead?.lead_state=='Documents Under Review'">Uploaded Documents</p>
+              <br>
+              <ng-container *ngFor="let finalDocument of finalDocuments; let i=index">
+                <div  [ngClass]="{
+                  'showLoader': uploadingDocument,'hideLoader': !uploadingDocument}">
+                  <div class="input-file" (click)="fileUpload.click()">
+                    <input #fileUpload type="file" (change)="onDocumentSelection($event, finalDocument)" name=""
+                      style="display: none;" id="f">
+                    <img src="assets/images/file_new.svg" class="img-fluid " alt=""> <span class="selected-file-name">
+                      {{finalDocument?.document_type}}
+                    </span>
+                  </div>
+                  <button class="btn btn-upload" (click)="download(finalDocument?.document_path)">Download</button>
+                  <button class="btn btn-upload" style="margin-left: 10px"
+                    (click)="uploadFinalDocument(finalDocument?.id)">Upload</button>
+                  <br><br>
+                </div>
+              </ng-container>
+
+              <!-- <ul class="files-list">
+                <li class="file-name" *ngFor="let documentToUpload of documentsToUpload; let i=index">
+                  {{documentToUpload?.name}} <a (click)="removeDocument(i)"><img src="assets/images/off_close.svg"
+                      class="img-fluid close-btn" alt=""></a>
+                </li>
+              </ul> -->
+              <br><br>
+            </div>
+          </div>
+
+        </div>
+        <!-- <div class="row">
+          <div class="col-md-12 col-12">
+            <div class="document-upload-box">
+              <p class="upload-document-title">Review & Complete</p><br>
+              <div class="row">
+                <div class="col-md-3 col-12">
+                  <button class="btn btn-dealer-call"><img src="assets/images/file-new-white.svg" class="img-fluid " alt=""> Review Document</button>
+                </div>
+                <div class="col-md-3 col-12">
+                  <button class="btn btn-dealer-call"><img src="assets/images/info_circle_outline.svg" class="img-fluid " alt=""> Sign Documents</button>
+                </div>
+                <div class="col-md-3 col-12">
+                  <button class="btn btn-dealer-call"><img src="assets/images/credit_card.svg" class="img-fluid " alt=""> Payment Options</button>
+                </div>
+                <div class="col-md-3 col-12">
+                  <button class="btn btn-dealer-call"><img src="assets/images/info_circle_outline.svg" class="img-fluid " alt=""> Reserve Car</button>
+                </div>
+              </div>
+              <div class="row top-pre-approved-box2">
+                <div class="col-md-7  " >
+
+                </div>
+
+                <div class="col-md-5 " >
+                  <div class="cong-col"  ><button class="btn btn-sign">Pay & Select Delivery Option<img src="assets/images/thin_big_right.svg" class="img-fluid right-arrow" alt=""></button> </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>

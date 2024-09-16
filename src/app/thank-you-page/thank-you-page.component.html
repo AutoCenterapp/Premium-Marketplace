@@ -1,0 +1,29 @@
+<section class="section section-dashbord-main">
+  <div class="container pt-3">
+    <div class="row">
+      <div class="col-md-4" *ngIf="lead?.vehicle">
+        <app-car-card class="cards__card card" [car]="lead?.vehicle"></app-car-card>
+      </div>
+      <div class="col-md-8"
+      [ngClass]="lead?.vehicle!=null? 'col-md-8': 'col-md-12'">
+        <div class=content>
+          <div class="wrapper-1">
+            <div class="wrapper-2">
+              <h1>Thank <a>You !</a></h1>
+              <p>{{thankYouForApplyingRoute==true?'Thanks for applying.':'Thanks for accepting the offer.'}}<br>The Dealership will reach you soon. </p>
+              <div class="d-flex flex-column align-items-center" *ngIf="thankYouForApplyingRoute==false">
+                <button class="btn btn-demo-started btn-buy w-50" routerLink="/offers"> View My Offers
+                </button>
+                <button class="btn btn-demo-started btn-chat w-50" *ngIf="vehicle && vehicle.chat_user_id"
+                (click)="checkIfLogin()?openChatMiniBox(vehicle?.chat_user_id):loginPage()"><img
+                    src="assets/images/chat-icon.svg" class="img-fluid" alt="">
+                  Chat With Dealer
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

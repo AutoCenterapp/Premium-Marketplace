@@ -1,0 +1,18 @@
+.dealerships-dashbord-left-contact-seller {
+  padding: 31px 40px 36px;
+  background: #FFFFFF;
+  border: 1px solid #EAEAEA;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+.btn--get-directions {
+  background: #0C2434;
+  border-radius: 8px;
+  width: 100%;
+  padding: 18px 0;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 15px;
+  color: #FFFFFF;
+  text-align: center;
+}

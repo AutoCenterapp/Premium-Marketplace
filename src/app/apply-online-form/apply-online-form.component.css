@@ -1,0 +1,198 @@
+.applying_for_vehicle {
+  align-items: center;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
+.request-note {
+  text-align: center;
+}
+
+input[type="checkbox"] {
+  position: relative;
+  appearance: none;
+  width: 50px;
+  height: 25px;
+  background: #ccc;
+  border-radius: 50px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+input[type="checkbox"]::after {
+  position: absolute;
+  content: "";
+  width: 25px;
+  height: 25px;
+  top: 0;
+  left: 0;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+  transition: 0.4s;
+}
+
+input:checked[type="checkbox"]::after {
+  left: 50%;
+}
+
+input:checked[type="checkbox"] {
+  background: #7da6ff;
+}
+
+
+.btn-demo-started {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 100% !important;
+  height: 50px;
+  background: #B71E1E;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 15px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.form-control:disabled,
+.form-control[readonly] {
+  background-color: #f1f8ff;
+  opacity: 1;
+}
+
+.section-dashbord-main {
+  margin-top: 5.8375rem;
+}
+
+.section-dashbord-main .container .row .col-md-3 {
+  width: 100% !important;
+  display: block !important;
+}
+
+.demo-form {
+  margin-top: 0px;
+}
+
+
+.path {
+  /*   display:none; */
+  z-index: 2;
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  fill: none;
+  stroke: #fff;
+  animation: dash 7s infinite linear forwards;
+  -webkit-animation: dash 7s infinite linear forwards;
+}
+
+
+
+.shadow {
+
+  z-index: 2;
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  fill: none;
+  stroke: #F0A529;
+  animation: dash 7s infinite linear forwards;
+  -webkit-animation: dash 7s infinite linear forwards;
+}
+
+.pt1 {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  fill: none;
+  stroke: #fff;
+  animation: dash 8s 2s infinite linear forwards;
+  -webkit-animation: dash 8s 2s infinite linear forwards;
+}
+
+.circleH {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  fill: none;
+  stroke: #fff;
+  animation: dash 5s 1s infinite linear forwards;
+  -webkit-animation: dash 5s 1s infinite linear forwards;
+}
+
+.shadow-circleH {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  fill: none;
+  stroke: #fff;
+  animation: dash 5s 5s infinite linear forwards;
+  -webkit-animation: dash 5s 1s infinite linear forwards;
+}
+
+.ThankA {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  fill: none;
+  stroke: #fff;
+  animation: dash 5s 1s infinite linear forwards;
+  -webkit-animation: dash 5s 1s infinite linear forwards;
+}
+
+.shadow-ThankA {
+  animation: dash 5s 5s infinite linear forwards;
+  -webkit-animation: dash 5s 1s infinite linear forwards;
+}
+
+.cicleK {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  fill: none;
+  stroke: #fff;
+  animation: dash 7s 5s infinite linear forwards;
+  -webkit-animation: dash 7s 5s infinite linear forwards;
+}
+
+.shadow-cicleK {
+  animation: dash 7s 5s infinite linear forwards;
+  -webkit-animation: dash 7s 5s infinite linear forwards;
+}
+
+.circleO {
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
+  fill: none;
+  stroke: #fff;
+  animation: dash 7s 5s infinite linear forwards;
+  -webkit-animation: dash 7s 5s infinite linear forwards;
+}
+
+.shadow-circleO {
+  animation: dash 7s 5s infinite linear forwards;
+  -webkit-animation: dash 7s 5s infinite linear forwards;
+}
+
+/* #Layer_2{
+    display: none;
+    z-index: 1;
+  } */
+
+/* .layer2Path{
+      z-index: 1;
+       stroke-dasharray: 3000;
+     stroke-dashoffset: 3000; 
+     fill:none;
+    stroke: #fff;
+       animation: dash 2s infinite linear forwards;
+      -webkit-animation:  dash 2s infinite linear forwards;
+  } */
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@-webkit-keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}

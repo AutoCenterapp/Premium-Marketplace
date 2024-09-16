@@ -1,0 +1,183 @@
+/* if needed old advance search just replace the code with commit of date 1/28/2023 and name marketPlaceViewChange */
+li.disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.btn-dropdown-toggle::after {
+  position: initial !important;
+}
+
+.dashbord-left-inner-main {
+  padding: 5px !important;
+  background: #ffffff !important;
+  border-radius: 10px !important;
+  margin-bottom: 20px;
+}
+
+.label_positioning {
+  position: absolute;
+  top: 0;
+  top: -1.2ex;
+  background-color: white;
+}
+
+.label_positioning_form_control {
+  position: absolute;
+  background-color: white;
+  left: 22px;
+  font-weight: 400 !important;
+  top: -8px;
+}
+
+.btn--dashbord-left-search {
+  height: 50px !important;
+}
+
+.btn-dropdown-toggle {
+  width: 100% !important;
+  /* min-width: 240px; */
+}
+
+ul {
+  max-height: 15em;
+  overflow-x: auto;
+}
+
+ul li {
+  cursor: pointer;
+}
+
+ul li a {
+  font-weight: 400;
+  color: #5f698a;
+}
+
+.dropdown-menu {
+  width: 100% !important;
+  padding: 8px 10px !important;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.btn-dropdown-toggle,
+input {
+  padding: 10px !important;
+  border-radius: 4px !important;
+}
+.alert-danger {
+  padding: 7px 10px !important;
+}
+.form-select{
+  padding: 10px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.input-field {
+  margin-bottom: 8px !important;
+}
+
+.loadingDataOverlay {
+  border-radius: 4px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  color: #5F6973;
+  font-size: 13px;
+  background-color: #daddddab;
+  transition: opacity 200ms ease-in-out;
+}
+
+.loadingDataOverlay span {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.applied_filters_wrapper {
+  color: #053361;
+  font-weight: 700;
+}
+.search_title_wrapper{
+  font-size: 13px;
+  display: inline-block;
+  width: max-content;
+  flex-basis: 100%;
+  margin: 2px 2px;
+  line-height: 1.5;
+}
+.dashbord-left-main-filter-title{
+  margin-bottom: 0px !important;
+}
+
+.btn--primary {
+  background: #b71e1e;
+  color: #FFFFFF;
+  font-weight: 700;
+  line-height: 15px;
+  border-radius: 40px;
+  padding: 10px 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.btn--primary:hover {
+  background: #0c2434;
+  color: #FFFFFF;
+}
+.input-field .form-control {
+  background-color: #FFFFFF;
+  padding: 18px 20px;
+  border: 1px solid #EAEAEA;
+  color: #5F6973;
+  border-radius: 8px;
+  font-size: 13px;
+  line-height: 15px;
+}
+.input-field .btn-dropdown-toggle {
+  background-color: #FFFFFF;
+  padding: 18px 20px;
+  border: 1px solid #EAEAEA;
+  border-radius: 8px;
+  width: 240px;
+  max-width: 100%;
+  font-size: 13px;
+  line-height: 15px;
+  text-transform: capitalize;
+  color: #5F6973;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.form-check {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+.form-check .form-check-input {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #EAEAEA;
+  border-radius: 4px;
+}
+.form-check .form-check-label {
+  font-size: 13px;
+  line-height: 41px;
+  text-transform: capitalize;
+  color: #5F6973;
+  margin-left: 10px;
+}
+
+/* modal designs starts */
+@media all and (max-width: 991px) {
+  .dashbord-left-inner-main{    
+    border: 1px solid #EAEAEA;
+    margin: 5px;
+  }
+}
+/* modal designs ends */

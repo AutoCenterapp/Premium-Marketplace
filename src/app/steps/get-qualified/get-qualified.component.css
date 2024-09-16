@@ -1,0 +1,33 @@
+.new-offer{
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+
+.top-info-box {
+  background: #438cf8;
+  border-radius: 8px;
+  min-height: 40px;
+  margin: 15px 0px;
+  font-weight: 500;
+  font-size: 16px;
+  color: #FFFFFF;
+  vertical-align: middle;
+}
+.file-name{
+  cursor: pointer;
+}
+.dashbord-right {
+  position: absolute;
+  z-index: 9;
+  right: 8px;
+  top: 8px;
+  background-color: #f4f4f4;
+  margin-bottom: 0px !important;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 8px 6px;
+}
+.dashbord-right ul.product-info-icons{
+  margin-bottom: 0px !important;
+}

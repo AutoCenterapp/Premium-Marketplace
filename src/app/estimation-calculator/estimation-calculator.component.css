@@ -1,0 +1,81 @@
+.estimation_calc_wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 10px !important;
+    flex-direction: column;
+}
+
+.estimated_price_box {
+    border: 1px solid #dee2e6;
+    padding: 15px 10px;
+}
+
+.estimated_price h5 {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+}
+
+.estimated_price_val h4 {
+    color: #B71E1E;
+    font-size: 30px;
+    padding: 16px;
+    text-align: center;
+}
+
+.vehicle_price h5 {
+    font-size: 12px;
+    color: #5F6973;
+    text-align: center;
+}
+
+.donw_payment_box,
+.credit_score_box,
+.loan_term_box,
+.btn_box {
+    margin-top: 20px;
+}
+
+.estimation_calc_wrapper label {
+    padding-bottom: 4px;
+    font-size: 16px;
+    color: #5F6973;
+}
+
+.donw_payment_box input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.general_box {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    border: 1px solid #dee2e6;
+    align-items: center;
+    padding: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.general_box span {
+    color: #5F6973;
+}
+
+.general_box.active span {
+    color: white;
+}
+
+.general_box.active {
+    background-color: #B71E1E;
+}
+
+.month {
+    font-size: 16px;
+    color: #5F6973;
+}
+
+.duration_text {
+    font-size: 14px;
+}

@@ -1,0 +1,61 @@
+<!-- SECTION SELECT VEHICLE TYPES -->
+<section class="vehicle-types" *ngIf="vehicleTypes && vehicleTypes.length>0">
+    <div class='vehicle-types__container'>
+
+        <div class="vehicle-types__header">
+            <h2 class="vehicle-types__title">
+                Select vehicle type
+            </h2>
+
+            <div class="vehicle-types__right-block">
+                <!-- <div class="filters-button">
+                    <div class="filters-button__text">Filters</div>
+                    <img class="filters-button__img" src="assets/images/filters.svg" alt="filters">
+                    <img class="filters-button__img-white" src="assets/images/filters-white.svg" alt="filters">
+                </div> -->
+
+                <div class="vehicle-types__swiper-buttons">
+                    <div class="vehicle-types__button-prev" id="logos_slider_btn" (click)="prev()"><span></span></div>
+                    <div class="vehicle-types__button-next" id="logos_slider_btn" (click)="next()"><span></span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- slider -->
+        <div class="vehicle-types__choice">
+
+            <!-- SLider wrapper -->
+            <div class="vehicle-types__slider swiper">
+                <!-- The moving part of the slider -->
+                <ngx-slick-carousel class="vehicle-types__wrapper swiper-wrapper carousel testimonials-main2"
+                    #slickModal="slick-carousel" [config]="slideConfig">
+                    <!-- <ngx-slick-carousel class="carousel testimonials-main2" #slickModal="slick-carousel" [config]="slideConfig"> -->
+                    <!-- Slide -->
+                    <div *ngFor="let type of vehicleTypes" ngxSlickItem class="vehicle-types__slide swiper-slide" style="width: fit-content !important">
+                        <div class="vehicle-types__card" (click)="applySearch(type)">
+                            <div class="vehicle-types__row">
+                                <div class="vehicle-types__name">{{type?.name}}</div>
+                                <div class="vehicle-types__number">
+                                    <span>{{type?.count}}</span>
+                                </div>
+                            </div>
+                            <div class="vehicle-types__img">
+                                <img class="car-white" [src]="type?.icon" alt="{{type?.vehicle_type}}">
+                                <!-- <img class="car-black" [src]="vehicleTypeImage(type?.vehicle_image_path_black, type?.vehicle_type, '-black')" alt="Sedan"> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </ngx-slick-carousel> -->
+
+                </ngx-slick-carousel>
+            </div>
+
+        </div>
+        <!-- end of slider -->
+
+    </div>
+
+
+
+</section>
+<!-- End of SECTION SELECT VEHICLE TYPES -->

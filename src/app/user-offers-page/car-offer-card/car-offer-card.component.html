@@ -1,0 +1,64 @@
+<div *ngIf="loadingData">
+  <app-skeleton-loader></app-skeleton-loader>select-offer
+</div>
+<div class="sorting-grid-box" *ngIf="offer && !loadingData" (click)="route()">
+  <div class="sorting-grid-img"
+       [ngClass]="{
+       'new-offer': offer?.lead_state=='New','declined': offer?.lead_state=='Declined',
+       'documents-under-review': offer?.lead_state=='Documents Under Review','documents-requested': offer?.lead_state=='Documents Requested',
+       'qualified-offer': offer?.lead_state=='Qualified For Offer','under-review': offer?.lead_state=='In Review',
+       'approved-offer': offer?.lead_state=='Approved'
+       }"
+  >
+
+    <img *ngIf="offer?.vehicle" [src]="offer?.vehicle?.images[0]?.image_path" class="img-fluid" alt="">
+    <img *ngIf="!offer?.vehicle" src="https://autocenterblopstorage.blob.core.windows.net/auto-center-admin/static%20resources/no_vehilce.png" class="img-fluid" alt="">
+    <!--        <span class="approved">Approval Valid Until 12/15/21</span>-->
+  </div>
+  <h5  class="price">{{offer?.vehicle?.price | currency}}</h5>
+  <h6 class="model mb-0">{{offer?.vehicle?.title}}</h6>
+  <!-- <div class="sorting-box-bottom2">
+  </div> -->
+  <!-- <div>
+    <p class="dealer-name">{{offer?.vehicle?.dealership?.location_name}}</p>
+    <p class="dealer-note">Get your dream Car Today!</p>
+  </div>
+  <button class="btn btn-dealer-call"><img src="assets/images/marketplace-button-phone-ic.svg" alt=""> <span
+    class="btn-dealer-call-text">{{offer?.vehicle?.dealership?.owner_phone}}</span></button> -->
+</div>
+<!-- Dealership section -->
+<div class="dashbord-left" *ngIf="offer?.dealership">
+  <div class="dealerships-dashbord-left-inner-main">
+    <div class="dealerships-dashbord-left-volvo-cars-box">
+      <div class="volvo-cars-box-top">
+        <div class="volvo-ic-back">
+          <img [src]="offer?.dealership?.avatar" class="img-fluid" alt="">
+        </div>
+        <div class="volvo-cars-info">
+          <h5 class="volvo-cars-title">{{offer?.dealership?.business_name}}</h5>
+          <div class="volvo-cars-box-middle rating_wrapper">
+            <span *ngFor="let fullStar of fullStars" class="fa fa-star checked" data-jest="full star"></span>
+            <span *ngFor="let emptyStar of emptyStars" class="fa fa-star text-white" data-jest="empty star"></span>
+            <p class="volvo-reviews">({{offer?.dealership?.reviews?offer?.dealership?.reviews:0}} reviews)</p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <p class="volvo-cars-contact"><i class="fa-solid fa-phone"></i><a
+                  [href]="'tel:' +offer?.dealership?.business_phone">{{offer?.dealership?.business_phone}} </a>
+              </p>
+            </div>
+            <div class="d-flex justify-content-between align-items-center" style="gap: 8px;">
+              <div class="dealership-location">
+                <a [href]="'https://www.google.com/maps/dir/?api=1&destination='+ offer?.dealership?.location_lat + ',' + offer?.dealership?.location_lng"
+                  target="_blank"><span class="text-white"><i
+                      class="fa fa-map-marker"></i></span></a>
+              </div>
+              <i class="fas fa-comments text-white" (click)="openChatMiniBox(offer?.chat_user_id)"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

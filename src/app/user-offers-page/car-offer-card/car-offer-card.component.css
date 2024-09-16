@@ -1,0 +1,126 @@
+.sorting-grid-box .sorting-grid-img.new-offer,
+.sorting-grid-box .sorting-grid-img.declined,
+.sorting-grid-box .sorting-grid-img.documents-requested,
+.sorting-grid-box .sorting-grid-img.qualified-offer,
+.sorting-grid-box .sorting-grid-img.under-review,
+.sorting-grid-box .sorting-grid-img.approved-offer,
+.sorting-grid-box .sorting-grid-img.documents-under-review {
+  position: relative;
+}
+
+.sorting-grid-box .sorting-grid-img.new-offer::before,
+.sorting-grid-box .sorting-grid-img.declined::before,
+.sorting-grid-box .sorting-grid-img.under-review::before,
+.sorting-grid-box .sorting-grid-img.documents-requested::before,
+.sorting-grid-box .sorting-grid-img.documents-under-review::before,
+.sorting-grid-box .sorting-grid-img.approved-offer::before,
+.sorting-grid-box .sorting-grid-img.qualified-offer::before {
+  content: "NEW - WAITING FOR REVIEW";
+  position: absolute;
+  width: 100%;
+  background-color: #5bb9ff;
+  padding: 10px;
+  color: #FFFFFF;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 12px;
+  letter-spacing: 0.03em;
+  border-radius: 8px;
+  text-align: center;
+  text-transform: uppercase;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.sorting-grid-box .sorting-grid-img.declined::before {
+  content: "Declined";
+  background-color: #980113;
+}
+
+.sorting-grid-box .sorting-grid-img.documents-under-review::before {
+  content: "Documents Under Review";
+  background-color: #d39503;
+}
+.sorting-grid-box .sorting-grid-img.documents-requested::before {
+  content: "Documents Requested";
+  background-color: #d35a03;
+}
+.sorting-grid-box .sorting-grid-img.qualified-offer::before {
+  content: "Qualified For Offer";
+  background-color: #023d83;
+}
+
+.sorting-grid-box .sorting-grid-img.under-review::before {
+  content: "OFFER IN REVIEW";
+  background-color: #d39803;
+}
+
+.sorting-grid-box .sorting-grid-img.approved-offer::before {
+  content: "Approved";
+  background-color: #185800;
+}
+.sorting-grid-box{
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+
+
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box {
+  padding: 12px;
+  border-radius: 0px;
+}
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-top {
+  border: none;
+  padding: 0px;
+  gap: 10%;
+}
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-top .volvo-cars-info {
+  margin-left: 0px !important;
+}
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-top .volvo-cars-info .volvo-cars-title {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: normal;
+  margin-bottom: 2px;
+}
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-top .volvo-ic-back {
+  width: 40px;
+  height: 40px;
+}
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-top .volvo-cars-info .volvo-cars-contact,
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-middle .volvo-reviews {
+  font-size: 12px;
+  line-height: normal;
+}
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-middle {
+  padding: 0px;
+}
+
+.volvo-cars-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 71%;
+}
+
+.volvo-cars-box-middle img {
+  width: 50px;
+  height: auto;
+}
+
+.volvo-reviews {
+  padding-left: 14px;
+}
+
+.volvo-cars-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

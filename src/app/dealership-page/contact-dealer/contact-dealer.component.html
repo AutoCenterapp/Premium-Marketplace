@@ -1,0 +1,17 @@
+<div class="dealerships-dashbord-left-contact-seller dealerships-dashbord-left-location">
+  <button *ngIf="showApplyOnlineBtn" [routerLink]="'/apply-online/' + this.dealerShipData?.slug" class="btn btn-demo-started btn-buy mb-0 mt-2">
+    <img src="assets/images/double-tick-icon.svg" class="img-fluid" alt=""> Apply Online
+  </button>
+  <button class="btn btn-demo-started btn-default add_query_btn mb-0 mt-2">
+    <a class="text-decoration-underline" [href]="'tel:' +this.dealerShipData?.business_phone">
+      <i class="fa fa-phone"></i>&nbsp;
+      {{this.dealerShipData?.business_phone}}
+    </a>
+  </button>
+  <div class="dealerships-dashbord-left-get-directions mt-2">
+    <a target="_blank" [href]="destinationUrl" class="btn btn--get-directions get_direction">
+      Get Directions
+    </a>
+  </div>
+
+</div>

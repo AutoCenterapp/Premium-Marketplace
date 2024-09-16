@@ -1,0 +1,90 @@
+.btn-small {
+    width: 40px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #c42424 !important;
+    color: white;
+    font-size: 14px;
+}
+
+.ad_wrapper {
+    margin-top: 0.875rem;
+}
+
+.fuel_trans_wrapper,
+.card__fuel,
+.card__transmission {
+    gap: 4px;
+}
+
+.fuel_trans_wrapper img {
+    width: 15px;
+}
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box {
+    padding: 12px;
+    border-radius: 0px;
+}
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-top {
+    border: none;
+    padding: 0px;
+    gap: 10%;
+}
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-top .volvo-cars-info {
+    margin-left: 0px !important;
+}
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-top .volvo-cars-info .volvo-cars-title {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: normal;
+    margin-bottom: 2px;
+}
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-top .volvo-ic-back {
+    width: 40px;
+    height: 40px;
+}
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-top .volvo-cars-info .volvo-cars-contact,
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-middle .volvo-reviews {
+    font-size: 12px;
+    line-height: normal;
+}
+
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box .volvo-cars-box-middle {
+    padding: 0px;
+}
+
+.volvo-cars-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    width: 71%;
+}
+
+.volvo-cars-box-middle img {
+    width: 50px;
+    height: auto;
+}
+
+.volvo-reviews {
+    padding-left: 14px;
+}
+
+.volvo-cars-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/* .distance_val{
+  font-size: 14px;
+  font-weight: 600;
+} */
+#saved-car-box .sorting-grid-img.saved-btn::before{
+  z-index: 999;
+}

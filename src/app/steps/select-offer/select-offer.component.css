@@ -1,0 +1,15 @@
+.dashbord-right {
+  position: absolute;
+  z-index: 9;
+  right: 8px;
+  top: 8px;
+  background-color: #f4f4f4;
+  margin-bottom: 0px !important;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 8px 6px;
+}
+
+.dashbord-right ul.product-info-icons {
+  margin-bottom: 0px !important;
+}

@@ -1,0 +1,566 @@
+<!--<img src="assets/images/demo-cover.png" width="100%">-->
+<div class="position-relative dashbord-left">
+  <app-general-loader [msg]="'Processing, Please wait!'" *ngIf="showLoader==true"></app-general-loader>
+  <ng-container>
+    <div class="dealerships-dashbord-left-inner-main">
+      <div class="row form-page section-dashbord-main" *ngIf="toggleSettings.showApplyOnlineForm">
+        <div class="col-md-2 col-lg-1">
+        </div>
+        <div class="col-md-8 col-lg-10 col-12 demo-form" [ngClass]="showLoader==true?'mb-0':''">
+          <div class="row">
+            <div class="col-md-4 d-flex flex-column">
+              <app-car-card *ngIf="(vehicleUserApplyingFor | json) != '{}' && vehicleUserApplyingFor!=null && vehicleUserApplyingFor!=undefined"
+              [car]="vehicleUserApplyingFor" class="cards__card card apply-online-card"></app-car-card>
+              <ng-container *ngIf="dealerShip!=undefined">
+                <app-dealership-card class="mt-2" [dealerShip]="dealerShip" [applyOnlineButtonRequired]="false"></app-dealership-card>
+                <!-- <app-contact-dealer [dealerShipData]="dealerShip"></app-contact-dealer> -->
+                </ng-container>
+            </div>
+            <!-- [ngClass]="((vehicleUserApplyingFor | json) != '{}' && vehicleUserApplyingFor!=null && vehicleUserApplyingFor!=undefined)? 'col-md-8': 'col-md-12'" -->
+            <div class="col-md-8">
+              <h1 class="request-note" style="margin-top: 2%">Apply Online</h1>
+              <main class="section section-main demo-form-iner">
+                <section class="section " [formGroup]="applyOnlineForm">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">First Name</label>
+                        <div class="input-field">
+                          <input type="text" formControlName="first_name" class="form-control d-input-f"
+                            placeholder="Enter First Name">
+                        </div>
+                        <div class="form-control"
+                          *ngIf="first_name_apply?.invalid && (first_name_apply?.dirty || first_name_apply?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="first_name_apply?.errors?.['required']">
+                            First Name is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label">Middle Name</label>
+                        <div class="input-field">
+                          <input formControlName="middle_name" type="text" class="form-control d-input-f"
+                            placeholder="Middle Name">
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">Last Name</label>
+                        <div class="input-field">
+                          <input formControlName="last_name" type="text" class="form-control d-input-f"
+                            placeholder="Enter Last Name">
+                        </div>
+                        <div class="form-control"
+                          *ngIf="last_name_apply?.invalid && (last_name_apply?.dirty || last_name_apply?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="last_name_apply?.errors?.['required']">
+                            Last Name is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">SSN</label>
+                        <div class="input-field">
+                          <input type="text" appSsnMask formControlName="ssn" class="form-control d-input-f"
+                            placeholder="XXX-XX-XXXX">
+                        </div>
+                        <div class="form-control" *ngIf="ssn?.invalid && (ssn?.dirty || ssn?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="ssn?.errors?.['required']">
+                            SSN is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label">Drivers License Number</label>
+                        <div class="input-field">
+                          <input type="text" formControlName="drive_license_number" class="form-control d-input-f"
+                            placeholder="License Number">
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">Phone</label>
+                        <div class="input-field">
+                          <input type="text" appPhoneMask formControlName="phone" class="form-control d-input-f"
+                            placeholder="(XXX) XXX-XXXX">
+                        </div>
+                        <div class="form-control" *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="phone?.errors?.['required']">
+                            Phone is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">Email</label>
+                        <div class="input-field">
+                          <input [attr.readonly]= "UID" type="email" formControlName="email" class="form-control d-input-f" placeholder="Email">
+                        </div>
+                        <div class="form-control"
+                          *ngIf="email_apply?.invalid && (email_apply?.dirty || email_apply?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="email_apply?.errors?.['required']">
+                            Email is required.
+                          </div>
+                          <div *ngIf="email_apply?.errors?.['pattern']">
+                            Please enter a valid email address.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label">Suffix</label>
+                        <div class="input-field">
+                          <input type="text" formControlName="suffix" class="form-control d-input-f" placeholder="Suffix">
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">Date Of Birth</label>
+                        <div class="input-field">
+                          <input type="date" (keydown)="preventDateInput($event)" formControlName="dob" class="form-control d-input-f" placeholder="DD-MM-YYYY"
+                            style="text-transform:uppercase">
+                        </div>
+                        <div class="form-control" *ngIf="dob?.invalid && (dob?.dirty || dob?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="dob?.errors?.['required']">
+                            Date Of Birth is required.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md-12 col-12">
+                        <label class="d-form-label mandatory-field">Current Address</label>
+                        <div class="input-field">
+                          <app-auto-complete (focusout)="onFocusOutOfAddressInputField()" (setAddress)="getAddress($event)"
+                            adressType="establishment" [autocompleteInput]="this.preSavedUserDetails?.current_address||''"></app-auto-complete>
+                        </div>
+                        <div class="form-control"
+                          *ngIf="current_address?.invalid && (current_address?.dirty || current_address?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="current_address?.errors?.['required']">
+                            Current Address is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">City</label>
+                        <div class="input-field">
+                          <input type="text" formControlName="current_city" class="form-control d-input-f"
+                            placeholder="City">
+                        </div>
+                        <div class="form-control"
+                          *ngIf="current_city?.invalid && (current_city?.dirty || current_city?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="current_city?.errors?.['required']">
+                            City is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">State</label>
+                        <div class="input-field">
+                          <input type="text" disbaled formControlName="current_state" class="form-control d-input-f"
+                            placeholder="State">
+                        </div>
+                        <div class="form-control"
+                          *ngIf="current_state?.invalid && (current_state?.dirty || current_state?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="current_state?.errors?.['required']">
+                            State is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">Zip Code</label>
+                        <div class="input-field">
+                          <input type="text" formControlName="current_zip_code" class="form-control d-input-f"
+                            placeholder="Zip Code">
+                        </div>
+                        <div class="form-control"
+                          *ngIf="current_zip_code?.invalid && (current_zip_code?.dirty || current_zip_code?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="current_zip_code?.errors?.['required']">
+                            Zip Code is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">Gender</label>
+                        <div class="input-field">
+                          <select formControlName="gender" class="form-select form-select-lg d-input-s" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option>Male</option>
+                            <option>Female</option>
+                            <option>Other</option>
+                          </select>
+                        </div>
+                        <div style="margin-top:0.6rem" class="form-control"
+                          *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)" class="alert alert-danger">
+                          <div *ngIf="gender?.errors?.['required']">
+                            Gender is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">Address Type</label>
+                        <div class="input-field">
+                          <select formControlName="current_address_type" class="form-select form-select-lg d-input-s"
+                            required>
+                            <option value="" disabled selected>Select Address Type</option>
+                            <option>Rent</option>
+                            <option>Own</option>
+                            <option>Other</option>
+                          </select>
+                        </div>
+                        <div style="margin-top:0.6rem" class="form-control"
+                          *ngIf="current_address_type?.invalid && (current_address_type?.dirty || current_address_type?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="current_address_type?.errors?.['required']">
+                            Address type is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">Length of Current Address</label>
+                        <div class="input-field">
+                          <input monthYearLengthMask type="text" formControlName="current_length_at_address"
+                            class="form-control d-input-f" placeholder="Months/Years">
+                        </div>
+                        <div style="margin-top:0.6rem" class="form-control"
+                          *ngIf="current_length_at_address?.invalid && (current_length_at_address?.dirty || current_length_at_address?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="current_length_at_address?.errors?.['required']">
+                            Length of Current Address is required.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <hr>
+                    <!-- Employement Details Section Starts-->
+                    <div class="row">
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">Employer Name</label>
+                        <div class="input-field">
+                          <input type="text" formControlName="empName" class="form-control d-input-f"
+                            placeholder="Enter Name">
+                        </div>
+                        <div class="form-control" *ngIf="empName?.invalid && (empName?.dirty || empName?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="empName?.errors?.['required']">
+                            Employer Name is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label">Employer Phone</label>
+                        <div class="input-field">
+                          <input type="text" appPhoneMask formControlName="empPhone" class="form-control d-input-f"
+                            placeholder="(XXX) XXX-XXXX">
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">Time at the Job Months/Years </label>
+                        <div class="input-field">
+                          <input type="text" monthYearLengthMask formControlName="empLengthOfJob"
+                            class="form-control d-input-f" placeholder="Months/Years">
+                        </div>
+                        <div class="form-control"
+                          *ngIf="empLengthOfJob?.invalid && (empLengthOfJob?.dirty || empLengthOfJob?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="empLengthOfJob?.errors?.['required']">
+                            Time at the Job is required.
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label">Income Type</label>
+                        <div class="input-field">
+                          <select formControlName="empIncomeType" class="form-select form-select-lg d-input-s" required>
+                            <option *ngFor="let incomeType of incomeTypes" [ngValue]="incomeType" selected>{{incomeType}}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label">Income Interval</label>
+                        <div class="input-field">
+                          <select formControlName="empIncomeInterVal" class="form-select form-select-lg d-input-s" required>
+                            <option *ngFor="let incomeInterval of incomeIntervals" [ngValue]="incomeInterval" selected>
+                              {{incomeInterval}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label">Status</label>
+                        <div class="input-field">
+                          <select formControlName="empStatus" class="form-select form-select-lg d-input-s" required>
+                            <option *ngFor="let status of statusTypes" [ngValue]="status" selected>{{status}}</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label">Amount</label>
+                        <div class="input-field">
+                          <input type="number" formControlName="empAmount" class="form-control d-input-f"
+                            placeholder="Enter Amount">
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Employement Details Section Ends-->
+                    <hr>
+                    <!-- Down Payment portion starts here -->
+                    <div class="row">
+                      <div class="col-md-4 col-12">
+                        <label class="d-form-label mandatory-field">Down Payment</label>
+                        <div class="input-field">
+                          <input type="number" formControlName="down_payment" class="form-control d-input-f"
+                            placeholder="Down Payment">
+                        </div>
+                        <div class="form-control"
+                          *ngIf="down_payment?.invalid && (down_payment?.dirty || down_payment?.touched)"
+                          class="alert alert-danger">
+                          <div *ngIf="down_payment?.errors?.['required']">
+                            Down Payment is required.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Down Payment portion ends here -->
+                    <div class="row">
+                      <div class="col-md-12 d-flex align-items-center"
+                        [ngStyle]="{'justify-content': coSignerFlag==false ? 'space-between' : 'flex-end' }">
+                        <div class="d-flex align-items-center">
+                          <label class="d-form-label">Add Co-Signer?</label>
+                          <input [checked]="coSignerFlag" (change)="changeVal($event)" type="checkbox" class="mx-2">
+                        </div>
+                      </div>
+                      <div class="row align-items-center" *ngIf="!coSignerFlag">
+                        <div class="col-md-5 col-12">
+                          <button class="btn btn-block btn-demo-started" type="button"
+                          (click)="saveInfoWhileApplying = true;onSubmitApplyOnlineForm()">Save info & Apply
+                          </button>
+                        </div>
+                        <div class="col-md-2 col-12 d-flex justify-content-center">
+                          <span>or</span>
+                        </div>
+                        <div class="col-md-5 col-12">
+                          <button class="btn btn-block btn-demo-started" type="button"
+                            (click)="saveInfoWhileApplying = false;onSubmitApplyOnlineForm()">Apply Only
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+                <app-co-signer *ngIf="coSignerFlag" (submitCoSignerForm)="getCoSignerForm($event)"></app-co-signer>
+              </main>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- signup section starts -->
+      <div class="row section-dashbord-main" *ngIf="toggleSettings.showSignupForm">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6 col-12 demo-form">
+          <main class="section section-main demo-form-iner">
+            <section class="section " [formGroup]="signupForm">
+              <div class="container">
+                <h1 class="request-note">Complete Signup for Applying</h1> <br>
+                <div class="row">
+                  <div class="col-md-6 col-12">
+                    <label class="d-form-label">First Name</label>
+                    <div class="input-field">
+                      <input type="text" formControlName="first_name" class="form-control d-input-f"
+                        placeholder="Enter First Name" required>
+                    </div>
+                    <div class="form-control" *ngIf="first_name?.invalid && (first_name?.dirty || first_name?.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="first_name?.errors?.['required']">
+                        First Name is required.
+                      </div>
+                      <div *ngIf="first_name?.errors?.['error']">
+                        {{ first_name?.errors?.['error'] }}
+                      </div>
+                      <div *ngIf="first_name?.errors?.['invalid']">
+                        {{ first_name?.errors?.['invalid']}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-12">
+                    <label class="d-form-label">Last Name</label>
+                    <div class="input-field">
+                      <input type="text" formControlName="last_name" class="form-control d-input-f"
+                        placeholder="Enter Last Name" required>
+                    </div>
+                    <div class="form-control" *ngIf="last_name?.invalid && (last_name?.dirty || last_name?.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="last_name?.errors?.['required']">
+                        Last Name is required.
+                      </div>
+                      <div *ngIf="last_name?.errors?.['error']">
+                        {{ first_name?.errors?.['error'] }}
+                      </div>
+                      <div *ngIf="last_name?.errors?.['invalid']">
+                        {{ first_name?.errors?.['invalid']}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-12">
+                    <label class="d-form-label">Email</label>
+                    <div class="input-field">
+                      <input type="email" [attr.readonly]= "UID" formControlName="email" class="form-control d-input-f" placeholder="Enter Email"
+                        required>
+                    </div>
+                    <div class="form-control" *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="email?.errors?.['required']">
+                        Email is required.
+                      </div>
+                      <div *ngIf="email?.errors?.['error']">
+                        {{ email?.errors?.['error'] }}
+                      </div>
+                      <div *ngIf="email?.errors?.['invalid']">
+                        {{ email?.errors?.['invalid']}}
+                      </div>
+                      <div *ngIf="email?.errors?.['pattern']">
+                        Please enter a valid email address.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-12">
+                    <label class="d-form-label">Phone</label>
+                    <div class="input-field inner-addon">
+                      <input type="text" appPhoneMask formControlName="phone" class="form-control d-input-f"
+                        placeholder="(XXX) XXX-XXXX" required>
+                    </div>
+                    <div class="form-control" *ngIf="phone_apply?.invalid && (phone_apply?.dirty || phone_apply?.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="phone_apply?.errors?.['required']">
+                        Phone is required.
+                      </div>
+                      <div *ngIf="phone_apply?.errors?.['error']">
+                        {{ phone_apply?.errors?.['error'] }}
+                      </div>
+                      <div *ngIf="phone_apply?.errors?.['invalid']">
+                        {{ phone_apply?.errors?.['invalid']}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-12">
+                    <label class="d-form-label">Password</label>
+                    <div class="input-field inner-addon">
+                      <a (click)="togglePassVisibility()" [class]="passVisibility ? '' : 'd-none'">
+                        <i style="color: #97a0b7;" class="fas fa-eye-slash"></i>
+                      </a>
+                      <a (click)="togglePassVisibility()" [class]="!passVisibility ? '' : 'd-none'">
+                        <i style="color: #97a0b7;" class="fas fa-eye"></i>
+                      </a>
+                      <input id="passInput" type="password" formControlName="password" class="form-control d-input-f"
+                        placeholder="Enter Password" required>
+                    </div>
+                    <div class="form-control" *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+                      class="alert alert-danger">
+                      <div *ngIf="password?.errors?.['required']">
+                        Password is required.
+                      </div>
+                      <div *ngIf="password?.errors?.['maxlength']">
+                        Maximum length 30 characters.
+                      </div>
+                      <div *ngIf="password?.errors?.['minlength']">
+                        Password must be at least 5 characters.
+                      </div>
+                      <div *ngIf="password?.errors?.['invalid']">
+                        {{ password?.errors?.['invalid'] }}
+                      </div>
+                      <div *ngIf="password?.errors?.['pattern']">
+                        Your password must be at least 8 characters long, can't contain spaces, contain at least one number
+                        and should be a mixture of uppercase and lowercase letters.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 col-12">
+                    <label class="d-form-label">Confirm Password</label>
+                    <div class="input-field inner-addon">
+                      <a (click)="toggleConfirmPassVisibility()" [class]="confirmPassVisibility ? '' : 'd-none'">
+                        <i style="color: #97a0b7;" class="fas fa-eye-slash"></i>
+                      </a>
+                      <a (click)="toggleConfirmPassVisibility()" [class]="!confirmPassVisibility ? '' : 'd-none'">
+                        <i style="color: #97a0b7;" class="fas fa-eye"></i>
+                      </a>
+                      <input id="confirmPassInput" type="password" formControlName="confirmPassword"
+                        class="form-control d-input-f" placeholder="Confirm Password" required>
+                    </div>
+                    <div class="form-control"
+                      *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)"
+                      class="alert alert-danger">
+                      <div
+                        *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched) && confirmPassword?.errors?.['required']">
+                        Confirm Password is Required.
+                      </div>
+                      <div *ngIf="confirmPassword?.errors?.['error']">{{confirmPassword?.errors?.['error']}}</div>
+                    </div>
+                  </div>
+                  <div *ngIf="signupForm.errors" class="alert alert-danger form-error">
+                    <div>
+                      {{signupForm.errors?.['Invalid']}}
+                    </div>
+                    <div>{{signupForm.errors?.['userInvalid']}}</div>
+                  </div>
+
+
+                  <div class="col-md-12">
+                    <button class="btn btn-demo-started" type="button" (click)="accepTermsAndConditions()">Signup &
+                      Apply</button>
+                  </div>
+                  <!-- <div class="col-md-12">
+                  <p class="d-text"> Already have an account? <a href="#" routerLink="/signin" class="d-text-link2"> Sign
+                      In</a></p>
+                </div> -->
+                </div>
+              </div>
+            </section>
+          </main>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+    </div>
+    <!-- signup section ends -->
+    <!-- The Modal -->
+  </ng-container>
+</div>
+<ng-template #termsAndConditionModal let-modal>
+
+  <div class="modal-header">
+    <h4 class="modal-title">Terms & Conditions</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true"><i class="fas fa-times"></i></span>
+    </button>
+  </div>
+  <!-- Modal body -->
+  <div class="modal-body terms_and_conditions_modal">
+    By clicking "Accept & Submit",I,the undersigned,<br>(a) for the purpose of security card, certify the below
+    representation to be correct;<br>(b) authorize the financial institutions, as they consider necessary and
+    appropriate, to obtain consumer credit reports on me periodically and to gather employment history and<br>(c)
+    understand that we, or any financial institutions to whome this application is submitted, will retain this
+    application whether or not it is the applicant's responsibility to notify the creditor or any change of name,
+    address, or employment. We and any financial institution to whom this application is submitted, may share
+    certain non-public personal information about you with your authorization or as provided by law<br><br>
+    <div class="form-check d-flex align-items-center">
+      <input class="form-check-input" [(ngModel)]="iAcceptTerms" type="checkbox" id="check1" name="option1" value="ok">
+      <label class="form-check-label px-3">I accept the above terms.</label>
+    </div>
+  </div>
+
+  <!-- Modal footer -->
+  <div class="modal-footer">
+    <button [ngStyle]="{'opacity': iAcceptTerms==true ? '1' : '0.4' }" type="button"
+      class="btn btn-demo-started btn-danger" (click)="iAcceptTerms?termsAndConditionsAccepted():1"
+      data-bs-dismiss="modal">Submit
+    </button>
+  </div>
+</ng-template>

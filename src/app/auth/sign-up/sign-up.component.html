@@ -1,0 +1,167 @@
+<!--<img src="../../../assets/images/demo-cover.png" width="100%">-->
+<app-general-loader *ngIf="showLoader==true"></app-general-loader>
+<div class="row form-page section-dashbord-main">
+  <div class="col-md-3">
+  </div>
+  <div class="col-md-6 col-12 demo-form">
+    <main class="section section-main demo-form-iner">
+      <section class="section " [formGroup]="signupForm">
+        <div class="container">
+          <h1 class="request-note">Signup</h1> <br>
+          <div class="row">
+            <div class="col-md-6 col-12">
+              <label class="d-form-label">First Name</label>
+              <div class="input-field">
+                <input type="text" formControlName="first_name" class="form-control d-input-f"
+                  placeholder="Enter First Name" required>
+              </div>
+              <div class="form-control" *ngIf="first_name?.invalid && (first_name?.dirty || first_name?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="first_name?.errors?.['required']">
+                  First Name is required.
+                </div>
+                <div *ngIf="first_name?.errors?.['error']">
+                  {{ first_name?.errors?.['error'] }}
+                </div>
+                <div *ngIf="first_name?.errors?.['invalid']">
+                  {{ first_name?.errors?.['invalid']}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <label class="d-form-label">Last Name</label>
+              <div class="input-field">
+                <input type="text" formControlName="last_name" class="form-control d-input-f"
+                  placeholder="Enter Last Name" required>
+              </div>
+              <div class="form-control" *ngIf="last_name?.invalid && (last_name?.dirty || last_name?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="last_name?.errors?.['required']">
+                  Last Name is required.
+                </div>
+                <div *ngIf="last_name?.errors?.['error']">
+                  {{ first_name?.errors?.['error'] }}
+                </div>
+                <div *ngIf="last_name?.errors?.['invalid']">
+                  {{ first_name?.errors?.['invalid']}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <label class="d-form-label">Email</label>
+              <div class="input-field">
+                <input type="email" formControlName="email" class="form-control d-input-f" placeholder="Enter Email"
+                  required>
+              </div>
+              <div class="form-control" *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="email?.errors?.['required']">
+                  Email is required.
+                </div>
+                <div *ngIf="email?.errors?.['error']">
+                  {{ email?.errors?.['error'] }}
+                </div>
+                <div *ngIf="email?.errors?.['invalid']">
+                  {{ email?.errors?.['invalid']}}
+                </div>
+                <div *ngIf="email?.errors?.['pattern']">
+                  Please enter a valid email address.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <label class="d-form-label">Phone</label>
+              <div class="input-field inner-addon">
+                <input type="text" appPhoneMask formControlName="phone" class="form-control d-input-f" placeholder="Enter Phone"
+                  required>
+              </div>
+              <div class="form-control" *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="phone?.errors?.['required']">
+                  Phone number is required.
+                </div>
+                <div *ngIf="phone?.errors?.['error']">
+                  {{ phone?.errors?.['error'] }}
+                </div>
+                <div *ngIf="phone?.errors?.['invalid']">
+                  {{ phone?.errors?.['invalid']}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <label class="d-form-label">Password</label>
+              <div class="input-field inner-addon">
+                <a (click)="togglePassVisibility()" [class]="passVisibility ? '' : 'd-none'">
+                  <i style="color: #97a0b7;" class="fas fa-eye-slash"></i>
+                </a>
+                <a (click)="togglePassVisibility()" [class]="!passVisibility ? '' : 'd-none'">
+                  <i style="color: #97a0b7;" class="fas fa-eye"></i>
+                </a>
+                <input id="passInput" type="password" formControlName="password" class="form-control d-input-f"
+                  placeholder="Enter Password" required>
+              </div>
+              <div class="form-control" *ngIf="password?.invalid && (password?.dirty || password?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="password?.errors?.['required']">
+                  Password is required.
+                </div>
+                <div *ngIf="password?.errors?.['maxlength']">
+                  Maximum length 30 characters.
+                </div>
+                <div *ngIf="password?.errors?.['minlength']">
+                  Password must be at least 5 characters.
+                </div>
+                <div *ngIf="password?.errors?.['invalid']">
+                  {{ password?.errors?.['invalid'] }}
+                </div>
+                <div *ngIf="password?.errors?.['pattern']">
+                  Your password must be at least 8 characters long, can't contain spaces, contain at least one number
+                  and should be a mixture of uppercase and lowercase letters.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <label class="d-form-label">Confirm Password</label>
+              <div class="input-field inner-addon">
+                <a (click)="toggleConfirmPassVisibility()" [class]="confirmPassVisibility ? '' : 'd-none'">
+                  <i style="color: #97a0b7;" class="fas fa-eye-slash"></i>
+                </a>
+                <a (click)="toggleConfirmPassVisibility()" [class]="!confirmPassVisibility ? '' : 'd-none'">
+                  <i style="color: #97a0b7;" class="fas fa-eye"></i>
+                </a>
+                <input id="confirmPassInput" type="password" formControlName="confirmPassword"
+                  class="form-control d-input-f" placeholder="Confirm Password" required>
+              </div>
+              <div class="form-control"
+                *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched)"
+                class="alert alert-danger">
+                <div
+                  *ngIf="confirmPassword?.invalid && (confirmPassword?.dirty || confirmPassword?.touched) && confirmPassword?.errors?.['required']">
+                  Confirm Password is Required.
+                </div>
+                <div *ngIf="confirmPassword?.errors?.['error']">{{confirmPassword?.errors?.['error']}}</div>
+              </div>
+            </div>
+            <div *ngIf="signupForm.errors" class="alert alert-danger form-error">
+              <div>
+                {{signupForm.errors?.['Invalid']}}
+              </div>
+              <div>{{signupForm.errors?.['userInvalid']}}</div>
+            </div>
+
+
+            <div class="col-md-12">
+              <button class="btn btn-demo-started" type="button" (click)="onSubmit()">Signup</button>
+            </div>
+            <div class="col-md-12">
+              <p class="d-text"> Already have an account? <a href="#" routerLink="/signin" class="d-text-link2"> Sign
+                  In</a></p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="col-md-3">
+  </div>
+</div>

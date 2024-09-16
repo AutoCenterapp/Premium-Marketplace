@@ -1,0 +1,76 @@
+<!-- <section class="section section-featured">
+  <div class="container">
+    <div class="row align-items-center featured-main">
+      <div class="col-md-6">
+        <h2 class="featured-title">Featured</h2>
+      </div>
+      <div class="col-md-6">
+        <ul class="nav nav-pills featured-nav-tab">
+          <li class="nav-item">
+            <a class="nav-link active" data-bs-toggle="pill" (click)="changeSelection('featured')">Featured</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="pill" (click)="changeSelection('popular')">Popular</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-bs-toggle="pill" (click)="changeSelection('recent')">Recent</a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane container active" id="featured-tab"></div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="featured-grid-main" id="featured-tab" *ngIf="loadingData==false; else loader">
+          <app-car-card *ngFor="let vehicle of vehicles" [car]="vehicle" ></app-car-card>
+        </div>
+        <ng-template #loader>
+          <div class="featured-grid-main">
+            <app-skeleton-loader></app-skeleton-loader>
+            <app-skeleton-loader></app-skeleton-loader>
+            <app-skeleton-loader></app-skeleton-loader>
+            <app-skeleton-loader></app-skeleton-loader>
+            <app-skeleton-loader></app-skeleton-loader>
+            <app-skeleton-loader></app-skeleton-loader>
+          </div>
+        </ng-template>
+        <div class="showing-result">
+          <output id="showing-result-output" class="showing-result-output">Showing {{vehicles?.length}} of
+            {{totalCount}} cars</output>
+          <a class="btn btn--dashbord-left-show-more" (click)="onScroll()">
+            Show More
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+<!-- SECTION FEATURED -->
+<section class="featured" id="featured">
+  <div class='featured__container position-relative'>
+
+    <div class="featured__header">
+      <h2 class="featured__title">&nbsp;</h2>
+      <div class="featured__switch">
+        <a (click)="changeSelection('recent')"><button [ngClass]="{'featured__button_active': this.sort=='recent'}" class="featured__button">Recent</button></a>
+        <a (click)="changeSelection('featured')"><button [ngClass]="{'featured__button_active': this.sort=='featured'}" class="featured__button featured__button_active">Featured</button></a>
+        <a (click)="changeSelection('popular')"><button [ngClass]="{'featured__button_active': this.sort=='popular'}" class="featured__button">Popular</button></a>
+      </div>
+    </div>
+
+    <div class="cards">
+      <app-car-card class="cards__card card" *ngFor="let vehicle of vehicles" [car]="vehicle"></app-car-card>
+    </div>
+    <!-- <app-general-loader *ngIf="loadingData"></app-general-loader> -->
+
+    <a class="more-btn" routerLink="marketplace">
+      <span>{{loadingData?'Loading items':'Load more items'}}</span>
+      <img *ngIf="loadingData" src="assets/images/icons/loading-gif.gif" alt="load">
+    </a>
+
+  </div>
+</section>
+<!-- End of SECTION FEATURED -->

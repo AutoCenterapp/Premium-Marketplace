@@ -1,0 +1,121 @@
+.site-header {
+    padding: 40px 0;
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: position 10s;
+    -ms-transition: position 10s;
+    -o-transition: position 10s;
+    transition: all 0.8s ease;
+        .header-right {
+            display: flex;
+            align-items: center;
+                .user-name {
+                    font-weight: 500;
+                    font-size: 22px;
+                    line-height: 25px;
+                    color: $primary;
+                    margin-right: 15px;
+                }
+                .user-img {
+                    width: 45px;
+                    height: 45px;
+                    object-fit: cover;
+                    border-radius: 100%;
+                    border: 3px solid $secondary;
+                    margin-right: 40px;
+                }
+                .btn--header {
+                    padding: 15px 25px;
+                    background-color: $secondary;
+                    font-weight: 500;
+                    font-size: 19px;
+                    line-height: 22px;
+                    color: #FFF8E5;
+                    border-radius: 7px;
+                    box-shadow: 0px 5.33333px 37.3333px rgba(183, 30, 30, 0.61);
+                }
+        }    
+}
+// .site-header.fixed-top { 
+//     animation: smoothScroll 1s forwards;
+// }
+// @keyframes smoothScroll {
+// 	0% {
+// 		transform: translateY(-40px);
+// 	}
+// 	100% {
+// 		transform: translateY(0px);
+// 	}
+// }
+.site-header.active {
+    background-color: $white;
+    padding: 10px 0;
+        .navbar-brand {
+            img {
+                height: 60px;
+                width: auto;
+            }
+        }
+}
+
+@media all and (max-width: 1600px) { 
+    .site-header {
+        padding: 20px 0;
+        .navbar-brand {
+            img {
+                height: 80px;
+                width: auto;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 991px) {
+    .site-header {
+        .navbar-brand {
+            img {
+                height: 60px;
+                width: auto;
+            }
+        }
+        .header-right {
+            .user-img { 
+                margin-right: 15px;
+            }
+            .user-name { 
+                font-size: 20px;
+                line-height: 22px;
+            }
+        }
+    }
+}
+
+@media all and (max-width: 767px) {
+    .site-header {
+        padding: 10px 0;
+            .navbar {
+                .container {
+                    flex-wrap: nowrap;
+                        .navbar-brand {
+                            img {
+                                width: auto;
+                                height: 45px;
+                            }
+                        }
+                        .header-right {
+                            .user-name {
+                                display: none;
+                            }
+                            .user-img {
+                                width: 40px;
+                                height: 40px;
+                                border: 2px solid $secondary;
+                            }
+                            .btn--header { 
+                                font-size: 15px;
+                                line-height: 18px;
+                            }
+                        }
+                }
+            }
+    }
+}

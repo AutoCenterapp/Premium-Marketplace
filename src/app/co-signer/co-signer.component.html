@@ -1,0 +1,284 @@
+<section class="section " [formGroup]="coSignerForm">
+  <div class="container">
+    <h5 class="text-center">Co-Signer Details</h5>
+    <hr>
+    <div class="row">
+      <div class="col-md-4 col-12">
+        <label class="d-form-label mandatory-field">First Name</label>
+        <div class="input-field">
+          <input type="text" formControlName="first_name" class="form-control d-input-f"
+                 placeholder="Enter First Name">
+        </div>
+        <div class="form-control"
+             *ngIf="first_name?.invalid && (first_name?.dirty || first_name?.touched)"
+             class="alert alert-danger">
+          <div *ngIf="first_name?.errors?.['required']">
+            First Name is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label">Middle Name</label>
+        <div class="input-field">
+          <input formControlName="middle_name" type="text" class="form-control d-input-f"
+                 placeholder="Middle Name">
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label mandatory-field">Last Name</label>
+        <div class="input-field">
+          <input formControlName="last_name" type="text" class="form-control d-input-f"
+                 placeholder="Enter Last Name">
+        </div>
+        <div class="form-control"
+             *ngIf="last_name?.invalid && (last_name?.dirty || last_name?.touched)"
+             class="alert alert-danger">
+          <div *ngIf="last_name?.errors?.['required']">
+            Last Name is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label mandatory-field">SSN</label>
+        <div class="input-field">
+          <input type="text" appSsnMask formControlName="ssn" class="form-control d-input-f" placeholder="XXX-XX-XXXX">
+        </div>
+        <div class="form-control" *ngIf="ssn?.invalid && (ssn?.dirty || ssn?.touched)" class="alert alert-danger">
+          <div *ngIf="ssn?.errors?.['required']">
+            SSN is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label">Drivers License Number</label>
+        <div class="input-field">
+          <input type="text" formControlName="drive_license_number" class="form-control d-input-f"
+                 placeholder="License Number">
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label mandatory-field">Phone</label>
+        <div class="input-field">
+          <input appPhoneMask type="text" formControlName="phone" class="form-control d-input-f" placeholder="(XXX) XXX-XXXX">
+        </div>
+        <div class="form-control" *ngIf="phone?.invalid && (phone?.dirty || phone?.touched)"
+             class="alert alert-danger">
+          <div *ngIf="phone?.errors?.['required']">
+            Phone is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label mandatory-field">Email</label>
+        <div class="input-field">
+          <input type="email" formControlName="email" class="form-control d-input-f" placeholder="Email">
+        </div>
+        <div class="form-control" *ngIf="email?.invalid && (email?.dirty || email?.touched)"
+             class="alert alert-danger">
+          <div *ngIf="email?.errors?.['required']">
+            Email is required.
+          </div>
+          <div *ngIf="email?.errors?.['pattern']">
+            Please enter a valid email address.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label">Suffix</label>
+        <div class="input-field">
+          <input type="text" formControlName="suffix" class="form-control d-input-f" placeholder="Suffix">
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label mandatory-field">Date Of Birth</label>
+        <div class="input-field">
+          <input type="date" (keydown)="preventDateInput($event)" formControlName="dob" class="form-control d-input-f" placeholder="DD-MM-YYYY"
+                 style="text-transform:uppercase">
+        </div>
+        <div class="form-control" *ngIf="dob?.invalid && (dob?.dirty || dob?.touched)" class="alert alert-danger">
+          <div *ngIf="dob?.errors?.['required']">
+            Date Of Birth is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-9 col-12">
+        <label class="d-form-label mandatory-field">Current Address</label>
+        <div class="input-field">
+          <app-auto-complete (focusout)="onFocusOutOfAddressInputField()" (setAddress)="getAddress($event)" adressType="establishment"></app-auto-complete>
+        </div>
+        <div class="form-control"
+             *ngIf="current_address?.invalid && (current_address?.dirty || current_address?.touched)"
+             class="alert alert-danger">
+          <div *ngIf="current_address?.errors?.['required']">
+            Current Address is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-12">
+        <label class="d-form-label mandatory-field">Gender</label>
+        <div class="input-field">
+          <select formControlName="gender" class="form-select form-select-lg d-input-s" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div style="margin-top:0.6rem" class="form-control"
+             *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)"
+             class="alert alert-danger">
+          <div *ngIf="gender?.errors?.['required']">
+            Gender is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label mandatory-field">City</label>
+        <div class="input-field">
+          <input type="text" formControlName="current_city" class="form-control d-input-f" placeholder="City">
+        </div>
+        <div class="form-control" *ngIf="current_city?.invalid && (current_city?.dirty || current_city?.touched)"
+             class="alert alert-danger">
+          <div *ngIf="current_city?.errors?.['required']">
+            City is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label mandatory-field">State</label>
+        <div class="input-field">
+          <input type="text" formControlName="current_state" class="form-control d-input-f" placeholder="State">
+        </div>
+        <div class="form-control" *ngIf="current_state?.invalid && (current_state?.dirty || current_state?.touched)"
+             class="alert alert-danger">
+          <div *ngIf="current_state?.errors?.['required']">
+            State is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label mandatory-field">Zip Code</label>
+        <div class="input-field">
+          <input type="text" formControlName="current_zip_code" class="form-control d-input-f" placeholder="Zip Code">
+        </div>
+        <div class="form-control"
+             *ngIf="current_zip_code?.invalid && (current_zip_code?.dirty || current_zip_code?.touched)"
+             class="alert alert-danger">
+          <div *ngIf="current_zip_code?.errors?.['required']">
+            Zip Code is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label mandatory-field">Address Type</label>
+        <div class="input-field">
+          <select formControlName="current_address_type" class="form-select form-select-lg d-input-s" required>
+            <option value="" disabled selected>Select Address Type</option>
+            <option>Rent</option>
+            <option>Own</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div style="margin-top:0.6rem" class="form-control"
+             *ngIf="current_address_type?.invalid && (current_address_type?.dirty || current_address_type?.touched)"
+             class="alert alert-danger">
+          <div *ngIf="current_address_type?.errors?.['required']">
+            Address type is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label mandatory-field">Length of Current Address</label>
+        <div class="input-field">
+          <input type="text" monthYearLengthMask formControlName="current_length_at_address" class="form-control d-input-f" placeholder="Months/Years">
+        </div>
+        <div style="margin-top:0.6rem" class="form-control"
+          *ngIf="current_length_at_address?.invalid && (current_length_at_address?.dirty || current_length_at_address?.touched)"
+          class="alert alert-danger">
+          <div *ngIf="current_length_at_address?.errors?.['required']">
+            Length of Current Address is required.
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <!-- Employement Details Section Starts-->
+    <!-- <div class="row">
+      <div class="col-md-4 col-12">
+        <label class="d-form-label mandatory-field">Emplyee Name</label>
+        <div class="input-field">
+          <input type="text" formControlName="empName" class="form-control d-input-f" placeholder="Enter Name">
+        </div>
+        <div class="form-control" *ngIf="empName?.invalid && (empName?.dirty || empName?.touched)"
+          class="alert alert-danger">
+          <div *ngIf="empName?.errors?.['required']">
+            Emplyee Name is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label">Emplyee Phone</label>
+        <div class="input-field">
+          <input type="text" formControlName="empPhone" class="form-control d-input-f" placeholder="Enter Phone">
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label mandatory-field">Time at the Job Months/Years </label>
+        <div class="input-field">
+          <input type="text" formControlName="empLengthOfJob" class="form-control d-input-f" placeholder="Months/Years">
+        </div>
+        <div class="form-control" *ngIf="empLengthOfJob?.invalid && (empLengthOfJob?.dirty || empLengthOfJob?.touched)"
+          class="alert alert-danger">
+          <div *ngIf="empLengthOfJob?.errors?.['required']">
+            Time at the Job is required.
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label">Income Type</label>
+        <div class="input-field">
+          <select formControlName="empIncomeType" class="form-select form-select-lg d-input-s" required>
+            <option *ngFor="let incomeType of incomeTypes" [ngValue]="incomeType" selected>{{incomeType}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label">Income Interval</label>
+        <div class="input-field">
+          <select formControlName="empIncomeInterVal" class="form-select form-select-lg d-input-s" required>
+            <option *ngFor="let incomeInterval of incomeIntervals" [ngValue]="incomeInterval" selected>{{incomeInterval}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label">Status</label>
+        <div class="input-field">
+          <select formControlName="empStatus" class="form-select form-select-lg d-input-s" required>
+            <option *ngFor="let status of statusTypes" [ngValue]="status" selected>{{status}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <label class="d-form-label">Amount</label>
+        <div class="input-field">
+          <input type="text" formControlName="empAmount" class="form-control d-input-f" placeholder="Enter Amount">
+        </div>
+      </div>
+    </div> -->
+    <!-- Employement Details Section Ends-->
+    <div class="row align-items-center">
+      <div class="col-md-5 col-12" *ngIf="iframePAth">
+        <button class="btn btn-demo-started"  type="button" (click)="onSubmitCoSignerForm(true)">Save info & Apply</button>
+      </div>
+      <div class="col-md-2 col-12 d-flex justify-content-center" *ngIf="iframePAth">
+        <span >or</span>
+      </div>
+      <div class="col-md-5 col-12">
+        <button class="btn btn-demo-started" type="button" (click)="onSubmitCoSignerForm(false)">Apply Only</button>
+      </div>
+    </div>
+  </div>
+</section>

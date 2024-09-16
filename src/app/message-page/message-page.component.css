@@ -1,0 +1,254 @@
+
+.total-spend-grid-box{
+ background: #FFFFFF;
+ padding: 25px 40px 35px 40px;
+ -webkit-filter: drop-shadow(0px 10.4067px 20.8134px rgba(46, 91, 255, 0.071));
+         filter: drop-shadow(0px 10.4067px 20.8134px rgba(46, 91, 255, 0.071));
+
+}
+.dealerships-dashbord-left-location {
+ padding: 30px 40px 35px;
+ background: #FFFFFF;
+ border: 1px solid #EAEAEA;
+ border-radius: 8px;
+ margin-bottom: 16px;
+ 
+  
+}
+.search-box{
+ background-color: #F9F9F9;
+border: 1px solid #EAEAEA;
+border-radius: 8px;
+font-weight: 500;
+font-size: 13px;
+line-height: 5px;
+text-transform: capitalize;
+color: #0C2434;
+opacity: 0.6;
+padding: 25px;
+}
+.inbox-list{
+ overflow-y: scroll;
+ margin-top: 20px;
+ height: 600px;
+}
+.inbox-list-item{
+padding: 10px 10px;
+vertical-align: middle;
+cursor: pointer;
+margin: 10px 5px;
+height: 72px;
+border-radius: 8px;
+
+}
+.inbox-list-item:hover{
+ background: #F5F7FC;
+
+}
+.inbox-img{
+ border-radius: 100%;
+ float: left;
+ width: 50px;
+ height: 50px;
+ margin-right: 5px;
+
+
+}
+.ib-person-name{
+ font-weight: 700;
+font-size: 13px;
+line-height: 15px;
+color: #0C2434;
+
+}
+.ib-person-name2{
+font-weight: 700;
+font-size: 16px;
+
+color: #0C2434;
+
+}
+.ib-person-msg{
+ font-weight: 400;
+font-size: 12px;
+line-height: 14px;
+color: #5F6973;
+
+}
+.person-detail{
+ vertical-align: middle;
+ float: left;
+margin: 5px 10px;
+}
+.person-detail2
+{
+   vertical-align: middle;
+ float: right;
+
+margin: 5px 10px;
+}
+.ib-person-time{
+ font-weight: 400;
+font-size: 12px;
+line-height: 14px;
+color: #5F6973;
+
+}
+.msg-count{
+ background: #B71E1E;
+ font-weight: 700;
+font-size: 9px;
+text-transform: capitalize;
+color: #FFFFFF;
+border-radius: 100%;
+padding: 7px;
+text-align: center;
+height: 22px;
+width: 22px;
+
+float: right;
+}
+/* width */
+::-webkit-scrollbar {
+ width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+ box-shadow: inset 0 0 5px white; 
+ border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+ background: #F0F5F7;
+border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+ background: #5F6973;
+}
+::-webkit-resizer{
+width:10px;
+}
+.inbox-list-item2{
+
+vertical-align: middle;
+height: 60px;
+
+}
+.ib-person-online-status{
+ font-weight: 400;
+font-size: 12px;
+margin: 0;
+color: #5F6973;
+}
+.ib-person-delete a{
+ font-weight: 600;
+font-size: 12px;
+line-height: 16px;
+text-align: center;
+text-decoration-line: underline;
+
+color: #B71E1E;
+}
+.line{
+ 
+ margin-left: -40px;
+ margin-right: -40px
+}
+.chat-box{
+ height: 510px;
+ overflow-y: scroll;
+ padding: 0px;
+}
+ 
+.chat-input-field{
+width: 100%;
+float: left;
+font-weight: 400;
+font-size: 17px;
+line-height: 24px;
+color: #5F6973; 
+height: 60px;
+margin-right: 20px;
+border: none;
+
+
+}
+input[type=text]:focus {
+  
+ box-shadow: none;
+}
+.btn-send{
+ background: #B71E1E;
+border-radius: 8px;
+font-weight: 700;
+font-size: 13px;
+line-height: 15px;
+color: #FFFFFF;
+padding: 15px 50px;
+margin-top: 15px;
+width: 100%;
+
+}
+.recever-details{
+vertical-align: middle;
+height: 60px;
+
+
+
+}
+.recever-name{
+ margin-left: 15px;
+ margin-top: 15px;
+ float: left;
+}
+.recever-message-box{
+height: auto;
+padding: 5px 0px;
+ 
+}
+.recever-message{
+ padding: 10px;
+ background: #E2EFFC;
+border-radius: 8px;
+font-weight: 400;
+font-size: 14px;
+line-height: 24px;
+color: #0C2434;
+width: fit-content; 
+}
+
+.sender-details{
+vertical-align: middle;
+height: 60px;
+ 
+
+}
+.sender-name{
+ margin-right: 15px;
+ margin-top: 15px;
+ float: right;
+}
+.sender-message-box{
+height: auto;
+ padding: 10px 0px;
+
+}
+.sender-message{
+ padding: 10px;
+ background: #F5F7FC;
+border-radius: 8px;
+font-weight: 400;
+font-size: 14px;
+line-height: 24px;
+color: #0C2434;
+width: fit-content; 
+float: right;
+}
+.sender-img{
+ float: right;
+}
+#chat-table{ width: 100%; border: none; }

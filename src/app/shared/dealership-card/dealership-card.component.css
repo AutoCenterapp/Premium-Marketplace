@@ -1,0 +1,74 @@
+.settings_for_distance{
+  padding: 0 0 8px !important;
+  border-bottom: none !important;
+}
+.distance_wrapper{
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  text-align: right;
+  padding-bottom: 4px;
+}
+.contact_wrapper{
+  padding: 4px 10px 6px !important;
+  background: #FFFFFF;
+  border: 1px solid #EAEAEA;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  margin-top: 10px;
+}
+button{
+  text-align: center;
+  color: #FFFFFF;
+  font-weight: 700;
+  height: 60px;
+  font-size: 16px;
+  line-height: 19px;
+  border-radius: 8px;
+  margin: 2px 0px;
+}
+.apply_online_btn{
+  background: #B71E1E;
+}
+.call_btn, .inquiry_btn{
+  background: #ffffff;
+  color: black;
+  border-radius: 8px;
+  border: 1px solid rgba(19, 16, 16, 0.2);
+}
+.chat_with_dealer_btn{
+  background: #a49f9f;
+  color: white;
+}
+.directions_btn{
+  background: #0C2434;
+  color: white;
+}
+.directions_btn a{
+  color: white;
+}
+.pl-0{
+  padding-left: 0px;
+}
+.pr-0{
+  padding-right: 0px;
+}
+.dashbord-left .dealerships-dashbord-left-inner-main .dealerships-dashbord-left-volvo-cars-box{
+  padding: 25px 25px 0px 25px;
+}
+@media all and (min-width: 767px) {
+  .phone_btn_font{
+    font-size: 13px;
+  }
+}
+@media all and (max-width: 767px) {
+  .pr-0{
+    padding-left: 0px;
+  }
+}
+.accordion-item{
+  background-color: transparent;
+  border: 1px solid #304552;
+  border-radius: 8px;
+}
+.accordion-item button{
+  background-color: transparent;
+}

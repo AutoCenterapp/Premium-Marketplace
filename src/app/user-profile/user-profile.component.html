@@ -1,0 +1,390 @@
+<!--<img src="assets/images/demo-cover.png" width="100%">-->
+
+<!-- signup section starts -->
+<div class="row form-page section-dashbord-main position-relative" >
+  <app-general-loader [msg]="'Processing, Please wait!'" *ngIf="showLoader==true"></app-general-loader>
+  <div class="col-md-2">
+  </div>
+  <div class="col-md-8 col-12 demo-form">
+    <main class="section section-main demo-form-iner">
+      <section class="section " [formGroup]="userProfileForm">
+        <div class="container">
+          <div class="row">
+            <div class="profile-pic">
+              <label class="-label" for="file">
+                <span class="glyphicon glyphicon-camera"></span>
+                <span>Change Image</span>
+              </label>
+              <input accept=".png, .jpg, .jpeg" id="file" type="file" (change)="uploadPicture($event)" />
+              <img [src]="imageUrl?imageUrl:'/assets/images/auto-center-logo.png'" id="output" width="200" />
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">First Name</label>
+              <div class="input-field">
+                <input type="text" formControlName="firstname" class="form-control d-input-f"
+                  placeholder="Enter First Name">
+              </div>
+              <div class="form-control"
+                *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="firstname?.errors?.['required']">
+                  First Name is required.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Middle Name</label>
+              <div class="input-field">
+                <input formControlName="middlename" type="text" class="form-control d-input-f"
+                  placeholder="Middle Name">
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Last Name</label>
+              <div class="input-field">
+                <input formControlName="lastname" type="text" class="form-control d-input-f"
+                  placeholder="Enter Last Name">
+              </div>
+              <div class="form-control"
+                *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="lastname?.errors?.['required']">
+                  Last Name is required.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">SSN</label>
+              <div class="input-field">
+                <input type="text" appSsnMask formControlName="ssn" class="form-control d-input-f"
+                  placeholder="XXX-XX-XXXX">
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Drivers License Number</label>
+              <div class="input-field">
+                <input type="text" formControlName="drivers_license_number" class="form-control d-input-f"
+                  placeholder="License Number">
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Phone</label>
+              <div class="input-field">
+                <input type="text" appPhoneMask formControlName="phone_no" class="form-control d-input-f"
+                  placeholder="(XXX) XXX-XXXX">
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Email</label>
+              <div class="input-field">
+                <input type="email" formControlName="email" class="form-control d-input-f" placeholder="Email">
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Suffix</label>
+              <div class="input-field">
+                <input type="text" formControlName="suffix" class="form-control d-input-f" placeholder="Suffix">
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Date Of Birth</label>
+              <div class="input-field">
+                <input type="date" (keydown)="preventDateInput($event)" formControlName="dob" class="form-control d-input-f" placeholder="DD-MM-YYYY"
+                  style="text-transform:uppercase">
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-12 col-12">
+              <label class="d-form-label">Current Address</label>
+              <div class="input-field">
+                <app-auto-complete (focusout)="onFocusOutOfAddressInputField()" (setAddress)="getAddress($event)"
+                  adressType="establishment" [autocompleteInput]="this.userProfileForm.controls.current_address.value||''"></app-auto-complete>
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">City</label>
+              <div class="input-field">
+                <input type="text" formControlName="current_city" class="form-control d-input-f"
+                  placeholder="City">
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">State</label>
+              <div class="input-field">
+                <input type="text" disbaled formControlName="current_state" class="form-control d-input-f"
+                  placeholder="State">
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Zip Code</label>
+              <div class="input-field">
+                <input type="text" formControlName="current_zip_code" class="form-control d-input-f"
+                  placeholder="Zip Code">
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Gender</label>
+              <div class="input-field">
+                <select formControlName="gender" class="form-select form-select-lg d-input-s" required>
+                  <option value="" disabled selected hidden>Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <div style="margin-top:0.6rem" class="form-control"
+                *ngIf="gender?.invalid && (gender?.dirty || gender?.touched)" class="alert alert-danger">
+                <div *ngIf="gender?.errors?.['required']">
+                  Gender is required.
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Address Type</label>
+              <div class="input-field">
+                <select formControlName="address_type" class="form-select form-select-lg d-input-s"
+                  required>
+                  <option value="" disabled selected>Select Address Type</option>
+                  <option>Rent</option>
+                  <option>Own</option>
+                  <option>Other</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Length of Current Address</label>
+              <div class="input-field">
+                <input monthYearLengthMask type="text" formControlName="length_of_current_address"
+                  class="form-control d-input-f" placeholder="Months/Years">
+              </div>
+            </div>
+          </div>
+          <hr>
+          <!-- Employement Details Section Starts-->
+          <div class="row">
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Employer Name</label>
+              <div class="input-field">
+                <input type="text" formControlName="employer_name" class="form-control d-input-f"
+                  placeholder="Enter Name">
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Employer Phone</label>
+              <div class="input-field">
+                <input type="text" appPhoneMask formControlName="employer_phone" class="form-control d-input-f"
+                  placeholder="(XXX) XXX-XXXX">
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Time at the Job Months/Years </label>
+              <div class="input-field">
+                <input type="text" monthYearLengthMask formControlName="time_at_job"
+                  class="form-control d-input-f" placeholder="Months/Years">
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Income Type</label>
+              <div class="input-field">
+                <select formControlName="income_type" class="form-select form-select-lg d-input-s" required>
+                  <option *ngFor="let incomeType of incomeTypes" [ngValue]="incomeType" selected>{{incomeType}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Income Interval</label>
+              <div class="input-field">
+                <select formControlName="income_interval" class="form-select form-select-lg d-input-s" required>
+                  <option *ngFor="let incomeInterval of incomeIntervals" [ngValue]="incomeInterval" selected>
+                    {{incomeInterval}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Status</label>
+              <div class="input-field">
+                <select formControlName="status" class="form-select form-select-lg d-input-s" required>
+                  <option *ngFor="let status of statusTypes" [ngValue]="status" selected>{{status}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4 col-12">
+              <label class="d-form-label">Amount</label>
+              <div class="input-field">
+                <input type="number" formControlName="amount" class="form-control d-input-f"
+                  placeholder="Enter Amount">
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="d-flex align-items-center">
+              <label class="d-form-label">Two Factor Authentication?</label>
+              <input [checked]="faFlag" (change)="changeVal($event)" type="checkbox" id="faFlag" class="mx-2">
+            </div>
+          </div>
+          <div class="col-md-12">
+            <button class="btn btn-demo-started" type="button" (click)="updateUserProfile()">
+              Update Profile
+            </button>
+          </div>
+          <!-- Employement Details Section Ends-->
+          <!-- <div class="row">
+            <div class="profile-pic">
+              <label class="-label" for="file">
+                <span class="glyphicon glyphicon-camera"></span>
+                <span>Change Image</span>
+              </label>
+              <input accept=".png, .jpg, .jpeg" id="file" type="file" (change)="uploadPicture($event)" />
+              <img [src]="imageUrl?imageUrl:'/assets/images/auto-center-logo.png'" id="output" width="200" />
+            </div>
+            <div class="col-md-6 col-12">
+              <label class="d-form-label">First Name</label>
+              <div class="input-field">
+                <input type="text" formControlName="firstname" class="form-control d-input-f"
+                  placeholder="Enter First Name" required>
+              </div>
+              <div class="form-control" *ngIf="firstname?.invalid && (firstname?.dirty || firstname?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="firstname?.errors?.['required']">
+                  First Name is required.
+                </div>
+                <div *ngIf="firstname?.errors?.['error']">
+                  {{ firstname?.errors?.['error'] }}
+                </div>
+                <div *ngIf="firstname?.errors?.['invalid']">
+                  {{ firstname?.errors?.['invalid']}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <label class="d-form-label">Middle Name</label>
+              <div class="input-field">
+                <input type="text" formControlName="middlename" class="form-control d-input-f"
+                  placeholder="Enter Middle Name" required>
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <label class="d-form-label">Last Name</label>
+              <div class="input-field">
+                <input type="text" formControlName="lastname" class="form-control d-input-f"
+                  placeholder="Enter Last Name" required>
+              </div>
+              <div class="form-control" *ngIf="lastname?.invalid && (lastname?.dirty || lastname?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="lastname?.errors?.['required']">
+                  Last Name is required.
+                </div>
+                <div *ngIf="lastname?.errors?.['error']">
+                  {{ lastname?.errors?.['error'] }}
+                </div>
+                <div *ngIf="lastname?.errors?.['invalid']">
+                  {{ lastname?.errors?.['invalid']}}
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-12">
+              <label class="d-form-label">Gender</label>
+              <div class="input-field">
+                <select formControlName="gender" class="form-select form-select-lg d-input-s" required>
+                  <option value="0" disabled selected hidden>Select Gender</option>
+                  <option value="1">Male</option>
+                  <option value="2">Female</option>
+                  <option value="3">Other</option>
+                </select>
+              </div>
+            </div>
+            <div *ngIf="userProfileForm.errors" class="alert alert-danger form-error">
+              <div>
+                {{userProfileForm.errors?.['Invalid']}}
+              </div>
+              <div>{{userProfileForm.errors?.['userInvalid']}}</div>
+            </div>
+
+            <p class="d-text" style="text-align: right;"><a routerLink="/change-password" href="#" class="d-text-link2">Change Password?</a>
+            </p>
+            <div class="col-md-12">
+              <button class="btn btn-demo-started" type="button" (click)="updateUserProfile()">
+                Update Profile
+              </button>
+            </div>
+          </div> -->
+        </div>
+      </section>
+    </main>
+  </div>
+  <div class="col-md-2">
+  </div>
+</div>
+<!-- signup section ends -->
+<!-- The Modal -->
+<div class="modal fade" id="myModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        By clicking "Accept & Submit",I,the undersigned,<br>(a) for the purpose of security card, certify the below
+        representation to be correct;<br>(b) authorize the financial institutions, as they consider necessary and
+        appropriate, to obtain consumer credit reports on me periodically and to gather employment history and<br>(c)
+        understand that we, or any financial institutions to whome this application is submitted, will retain this
+        application whether or not it is the applicant's responsibility to notify the creditor or any change of name,
+        address, or employment. We and any financial institution to whom this application is submitted, may share
+        certain non-public personal information about you with your authorization or as provided by law<br><br>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" id="check1" name="option1" value="ok">
+          <label class="form-check-label">i accept the above terms.</label>
+        </div>
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-demo-started btn-danger" routerLink="/get-qualified"
+          data-bs-dismiss="modal">Submit
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<p class="d-text"><a href="#" class="d-text-link2 d-none" data-bs-toggle="modal" id="FA-btn" data-bs-target="#FAModal">Open?</a>
+</p>
+<!-- The Modal -->
+<div class="modal fade " id="FAModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content demo-form">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <button type="button" class="btn-close d-none" data-bs-dismiss="modal" id="FA-close"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body ">
+        <h4 class="request-note">Two Factor Authentication</h4>
+        <p>Your account will be protected with two-factor authentication. Please enter your phone number and verify to enable two factor Authentication.</p>
+        <br><label class="d-form-label" >Enter Phone</label><br>
+        <input id="FAphone"  type="tel" class="form-control d-input-f"  >
+        <button type="button" class="btn btn-demo-started ms-2 mt-0"  id="continue-phone" (click)="sendCode()">Continue</button>
+        <div id="verify-body" style="display: none">
+          <p class="d-text mt-2"><a  href="javascript:void(0)" class="d-text-link2" (click)="editPhone()">Edit Phone?</a><span class="ms-2" ></span>
+          </p>
+
+          <div class="d-flex justify-content-between align-items-center " style="margin-top: 5px !important; padding-top: 0px !important">
+            <input id="FAcode"  type="number" class="form-control d-input-f" placeholder="Enter Code">
+            <button type="button" class="btn btn-demo-started ms-2 mt-3"  (click)="enableFA()">Verify</button>
+          </div>
+          <p class="d-text mt-0"><a  href="javascript:void(0)" class="d-text-link2" id="resend-code" (click)="sendCode()">Didn't received the code?Resend code.</a><span class="ms-2" id="timer"></span>
+          </p>
+        </div>
+
+      </div>
+
+
+
+    </div>
+  </div>
+</div>
